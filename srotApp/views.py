@@ -18,3 +18,9 @@ def discussions(request):
     all_dis = Discussion.objects.all()
 
     return render(request,'discussions.html',{"all_dis":all_dis})
+
+def sidebar(request):
+    return render(request,'donations/sidebar.html')
+
+def plasma(request):
+    return render(request,'donations/plasma.html')

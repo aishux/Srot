@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Have a lead?</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https:////maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/media/css/sidebar.css">
+		{% block css %}{% endblock css %}
+    </head>
+    <body>
+
+    <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Have any leads? Fill the form and we'll verify it for you!</h1>
+			<hr>
+		</div>
+		
+		<div class="col-md-4">
+			<div id="accordian" class="menu-parent style1">
+				<ul class="menu">
+					{% comment %} <li class="menu-child">
+						<a href="#"><i class="fa fa-truck"></i> Delivery Information</a>
+						<ul>
+							<li><a href="#">Delivery charges</a></li>
+							<li><a href="#">Next Day Delivery</a></li>
+							<li><a href="#">Courier Delivery</a></li>
+							<li><a href="#">Northern Ireland</a></li>
+							<li><a href="#">Same-day and other enhanced delivery options</a></li>
+							<li><a href="#">Express 5 Day Delivery (Furniture and Sofas)</a></li>
+							<li><a href="#">Send to a Friend</a></li>
+							<li><a href="#">Hermes</a></li>
+						</ul>
+					</li> {% endcomment %}
+					<li class="menu-child">
+						<a href="#"><i class="fa fa-plus"></i>Plasma Donation</a>
+					</li>
+
+					<li class="menu-child">
+						<a href="#"><i class="fa fa-hourglass-half "></i>Oxygen Cylinders/Concentrators</a>
+					</li>
+					<li class="menu-child">
+						<a href="#"><i class="fa fa-hospital-o"></i>Remdesivir / Tocilizumab </a>
+					</li>
+					<li class="menu-child">
+						<a href="#"><i class="fa fa-bed"></i> Beds availability </a>
+					</li>
+					<li class="menu-child">
+						<a href="#"><i class="fa fa-cutlery"></i> Food Supplier</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="col-md-8">
+			
+			{% block body %} 
+		
+		{% endblock %}
+
+		</div>
+		
+		
+		<div class="col-md-12">
+			<p style="font-style: italic; color: #2196f3; font-size: 18px; text-align: center; margin-top: 50px; margin-bottom: 20px;">Footer Text</p>
+		</div>
+	</div>
+</div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="/media/js/sidebar.js"></script>
+		{% block script %} {% endblock script %}
+		
+    </body>
+</html>
