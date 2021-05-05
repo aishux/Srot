@@ -24,9 +24,9 @@
 fieldset {
 	border: medium none !important;
 	margin: 0 0 10px;
-	min-width: 100%;
+	min-width: 80%;
 	padding: 0;
-	width: 100%;
+	width: 60%;
 }
 
 #contact input[type="text"], #contact input[type="email"], #contact input[type="tel"], #contact input[type="url"], #contact textarea {
@@ -92,3 +92,44 @@ fieldset {
 	margin:0 auto;
 	position:relative;
 }
+
+.form-inline {  
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+  }
+  
+  .form-inline label {
+	margin: 5px 10px 5px 0;
+  }
+  
+  .form-inline input {
+	vertical-align: middle;
+	margin: 5px 10px 5px 0;
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+  }
+  
+  .form-inline button {
+	padding: 10px 20px;
+	background-color: dodgerblue;
+	border: 1px solid #ddd;
+	color: white;
+	cursor: pointer;
+  }
+  
+  .form-inline button:hover {
+	background-color: royalblue;
+  }
+  
+  @media (max-width: 800px) {
+	.form-inline input {
+	  margin: 10px 0;
+	}
+	
+	.form-inline {
+	  flex-direction: column;
+	  align-items: stretch;
+	}
+  }

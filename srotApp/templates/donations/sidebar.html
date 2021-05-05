@@ -26,7 +26,7 @@
 					{% comment %} <li class="menu-child">
 						<a href="#"><i class="fa fa-truck"></i> Delivery Information</a>
 						<ul>
-							<li><a href="#">Delivery charges</a></li>
+							<li><a href="{% url 'plasma' %}">Delivery charges</a></li>
 							<li><a href="#">Next Day Delivery</a></li>
 							<li><a href="#">Courier Delivery</a></li>
 							<li><a href="#">Northern Ireland</a></li>
@@ -35,22 +35,24 @@
 							<li><a href="#">Send to a Friend</a></li>
 							<li><a href="#">Hermes</a></li>
 						</ul>
-					</li> {% endcomment %}
-					<li class="menu-child">
-						<a href="#"><i class="fa fa-plus"></i>Plasma Donation</a>
+					</li>  {% endcomment %}
+					{% comment %} <li><a href="{% url 'plasma' %}"><i class="fa fa-plus"></i>Delivery charges</a></li> {% endcomment %}
+					<li class="menu-parent">
+					
+						<a href="{% url 'plasma' %}"><i class="fa fa-plus"></i>Plasma Donation</a>
 					</li>
 
-					<li class="menu-child">
-						<a href="#"><i class="fa fa-hourglass-half "></i>Oxygen Cylinders/Concentrators</a>
+					<li>
+						<a href="{% url 'oxygen' %}"><i class="fa fa-hourglass-half "></i>Oxygen Cylinders/Concentrators</a>
 					</li>
-					<li class="menu-child">
-						<a href="#"><i class="fa fa-hospital-o"></i>Remdesivir / Tocilizumab </a>
+					<li>
+						<a href="{% url 'injections' %}"><i class="fa fa-hospital-o"></i>Remdesivir / Tocilizumab </a>
 					</li>
-					<li class="menu-child">
-						<a href="#"><i class="fa fa-bed"></i> Beds availability </a>
+					<li>
+						<a href="{% url 'beds' %}"><i class="fa fa-bed"></i> Beds availability </a>
 					</li>
-					<li class="menu-child">
-						<a href="#"><i class="fa fa-cutlery"></i> Food Supplier</a>
+					<li>
+						<a href="{% url 'food' %}"><i class="fa fa-cutlery"></i> Food Supplier</a>
 					</li>
 				</ul>
 			</div>

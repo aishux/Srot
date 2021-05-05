@@ -1,0 +1,65 @@
+{% extends "donations/sidebar.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/media/css/plasma.css">
+{% endblock css %}
+
+{% block body %}
+
+<div class="container" id="form_container">
+  <form id="contact" action="{% url 'beds' %}" method="post"> {% csrf_token %}
+    <h3>Bed Availablity Leads</h3>
+<h4>Your help can save someone's life. We appreciate your time and efforts.</h4>    <fieldset>
+      <label for="cars">Hospital Name : <label style="color:red;">*</label></label>
+      <input placeholder="Name" type="text" tabindex="1" name="hospital_name" required autofocus>
+    </fieldset>
+    <fieldset>
+      <label for="cars"> Hospital Contact: <label style="color:red;">*</label></label>
+      <input placeholder="Phone Number" type="tel" tabindex="3" name="hospital_contact" required autofocus>
+    </fieldset>
+    <fieldset>
+      <label for="cars">Hospital City: <label style="color:red;">*</label></label>
+      <input placeholder="City" type="tel" tabindex="3" name="hospital_city" required autofocus>
+    </fieldset>
+
+    <fieldset>
+      <label for="cars">Hospital Address <label style="color:red;">*</label></label>
+      <textarea id="w3review" name="hospital_address" rows="2" cols="20" required autofocus></textarea>
+    </fieldset>
+
+    <fieldset class="form-inline">
+      <label for="cars" class="form-inline">Number of Beds Available : <label style="color:red;">*</label></label>
+
+      <select name="hospital_beds" id="cars" required>
+        <option value="Don't know">Don't know</option>
+        <option value="1-10">1-10</option>
+        <option value="11-20">11-20</option>
+        <option value="20 and above">20 and above</option>
+      </select>
+    </fieldset>
+    
+    <fieldset class="form-inline">
+      <label for="cars">Is it verified by you? : <label style="color:red;">*</label> </label><p></p>
+      <input type="radio" id="yes" name="hospital_verify" value="yes">
+      <label for="yes">Yes</label><br>
+      <input type="radio" id="no" name="hospital_verify" value="no">
+      <label for="no">No</label><br>
+      <input type="radio" id="dont know" name="hospital_verify" value="don't know">
+      <label for="dont know">Don't Know</label>
+    </fieldset>
+
+     <fieldset>
+      <label for="cars">Additional Details</label>
+      <textarea id="w3review" name="hospital_details" rows="4" cols="50"></textarea>
+    </fieldset>
+
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+
+  </form>
+
+
+</div>
+
+{% endblock %}

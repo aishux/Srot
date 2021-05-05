@@ -6,31 +6,83 @@
 
 {% block body %}
 
-<div class="container" id="form_container">  
-  <form id="contact" action="" method="post">
-    <h3>Quick Contact</h3>
-    <h4>Contact us today, and get reply with in 24 hours!</h4>
+<div class="container" id="form_container">
+  <form id="contact" action="{% url 'plasma' %}" method="post"> {% csrf_token %}
+    <h3>Donate Plasma</h3>
+    <h4>Your help can save someone's life. We appreciate your time and efforts.</h4>
     <fieldset>
-      <input placeholder="Your name" type="text" tabindex="1" required autofocus>
+      <label for="cars">Donor's Name : <label style="color:red;">*</label> </label>
+      <input placeholder="Name" type="text" tabindex="1" name="plasma_donor_name" required autofocus>
     </fieldset>
     <fieldset>
-      <input placeholder="Your Email Address" type="email" tabindex="2" required>
+      <label for="cars">Donor's Email :  <label style="color:red;">*</label></label>
+      <input placeholder="Email" type="email" tabindex="2" name="plasma_donor_email" required autofocus>
     </fieldset>
     <fieldset>
-      <input placeholder="Your Phone Number" type="tel" tabindex="3" required>
+      <label for="cars">Donor's Contact:  <label style="color:red;">*</label></label>
+      <input placeholder="Phone Number" type="tel" tabindex="3" name="plasma_donor_contact" required autofocus>
     </fieldset>
     <fieldset>
-      <input placeholder="Your Web Site starts with http://" type="url" tabindex="4" required>
+      <label for="cars">Donor's City:  <label style="color:red;">*</label></label>
+      <input placeholder="City" type="tel" tabindex="3" name="plasma_donor_city" required autofocus>
     </fieldset>
+    
+    <div class="form-inline">
+    <fieldset class="form-inline">
+      <label for="cars" class="form-inline">Donar's Blood Group  <label style="color:red;">*</label></label>
+
+      <select name="plasma_donor_bloodgroup" id="cars">
+        <option value="A+">A+</option>
+        <option value="B+">B+</option>
+        <option value="AB+">AB+</option>
+        <option value="O+">O+</option>
+        <option value="A-">A-</option>
+        <option value="B-">B-</option>
+        <option value="AB-">AB-</option>
+        <option value="O-">O-</option>
+      </select>
+    </fieldset>
+   
+    <fieldset class="form-inline">
+      <label for="quantity" class="form-inline">Age  <label style="color:red;">*</label></label>
+      <input type="number" id="quantity" name="plasma_donor_age" min="18" max="60" required autofocus>
+    </fieldset>
+  </div>
+
+    <fieldset class="form-inline">
+      <label for="cars">Gender :  <label style="color:red;">*</label></label><p></p>
+      <input type="radio" id="male" name="plasma_donor_gender" value="male">
+      <label for="male">Male</label><br>
+      <input type="radio" id="female" name="plasma_donor_gender" value="female">
+      <label for="female">Female</label><br>
+      <input type="radio" id="other" name="plasma_donor_gender" value="other">
+      <label for="other">Other</label>
+    </fieldset>
+
     <fieldset>
-      <textarea placeholder="Type your Message Here...." tabindex="5" required></textarea>
+      <label>Do you meet the following eligiblity?</label>
+      <li>Tested Covid +ve in last 120 days</li>
+      <li>Women must have not concieved a child</li>
+      <li>Should not have recieved plasma themselves</li>
+      <li>Should be between 18-65 years</i>
+      <li>Should have recovered from multiple symptoms</li>
+      <li>Should not have diabetes or High BP or thyroid</li>
+      <li>Should at least weigh 55 kgs</li>
+      <li>Should not have had the COVID vaccine</li>
+      <br>
+      <input type="checkbox" value="yes" name="plasma_donor_confirm" required>
+       <label style="color:red;">*</label>
+      <label for="vehicle2"> I confirm that I have read the above criteria</label>
+
     </fieldset>
+
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
+
   </form>
- 
-  
+
+
 </div>
 
 {% endblock %}

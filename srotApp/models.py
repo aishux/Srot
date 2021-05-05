@@ -14,4 +14,63 @@ class Discussion(models.Model):
     def __str__(self):
         return self.title
     
+class Plasma(models.Model):
+    plasma_donor_name = models.CharField(max_length=100)
+    plasma_donor_email = models.CharField(max_length=100)
+    plasma_donor_contact = models.CharField(max_length=100)
+    plasma_donor_city= models.CharField(max_length=100)
+    plasma_donor_bloodgroup = models.CharField(max_length=100)
+    plasma_donor_age = models.IntegerField()
+    plasma_donor_gender = models.CharField(max_length=100)
+    plasma_donor_confirm = models.CharField(max_length=100)
+    
 
+    def __str__(self):
+        return self.plasma_donor_name + " - "  + self.plasma_donor_city
+
+class Oxygen(models.Model):
+    oxygen_lead_name = models.CharField(max_length=100)
+    oxygen_lead_email = models.CharField(max_length=100)
+    oxygen_lead_contact = models.CharField(max_length=100)
+    oxygen_lead_city = models.CharField(max_length=100)
+    oxygen_lead_verify = models.CharField(max_length=100)
+    oxygen_lead_details = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.oxygen_lead_name + " - "  + self.oxygen_lead_city
+
+class Injection(models.Model):
+    injection_lead_name = models.CharField(max_length=100)
+    injection_lead_email = models.CharField(max_length=100)
+    injection_lead_contact = models.CharField(max_length=100)
+    injection_lead_city = models.CharField(max_length=100)
+    injection_lead_drugname = models.CharField(max_length=100)
+    injection_lead_verify = models.CharField(max_length=100)
+    injection_lead_details = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.injection_lead_name + " - "  + self.injection_lead_city
+
+class Food(models.Model):
+    food_supplier_name = models.CharField(max_length=100)
+    food_supplier_email = models.CharField(max_length=100)
+    food_supplier_contact = models.CharField(max_length=100)
+    food_supplier_city = models.CharField(max_length=100)
+    food_supplier_service = models.CharField(max_length=100)
+    food_supplier_verify = models.CharField(max_length=100)
+    food_supplier_details = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.food_supplier_name + " - "  + self.food_supplier_city
+
+class Beds(models.Model):
+    hospital_name = models.CharField(max_length=100)
+    hospital_contact = models.CharField(max_length=100)
+    hospital_city = models.CharField(max_length=100)
+    hospital_address = models.CharField(max_length=500)
+    hospital_beds = models.CharField(max_length=100)
+    hospital_verify = models.CharField(max_length=100)
+    hospital_details = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.hospital_name + " - "  + self.hospital_city
