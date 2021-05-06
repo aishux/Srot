@@ -7,12 +7,22 @@ class Discussion(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     dis_type = models.CharField(choices=(("Helping",'Helping'),("Help Needed","Help Needed")),max_length=100)
+    blood_grp = models.CharField(max_length=50,blank=True,null=True)
+    phone_nos = models.CharField(max_length=100,blank=True,null=True)
+    map_link = models.CharField(max_length=1000,blank=True,null=True)
     information = models.TextField()
     hashtags = models.TextField()
     timestamp = models.DateTimeField(default=tz.now)
 
     def __str__(self):
         return self.title
+
+class DiscussionComment(models.Model):
+    parent_dis = models.ForeignKey(Discussion,on_delete=models.CASCADE)
+    user = models.CharField(max_length=1000)
+    comment = models.TextField()
+    timestamp = models.DateTimeField(default=tz.now)
+    
     
 class Plasma(models.Model):
     plasma_donor_name = models.CharField(max_length=100)

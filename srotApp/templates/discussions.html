@@ -11,6 +11,9 @@
         integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
     <link rel="stylesheet" href="/media/css/discussion.css">
+
+    <!-- IMPPPPPPPP TO KEEP THIS SCRIPT HERE BECAUSE WE ARE USING THIS IN BETWEEN AND KEEPING THIS AT END WILL GIVE $ NOT FOUND ERROR-->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -100,7 +103,8 @@
                     <!-- Inner main body -->
 
                     <!-- Forum List -->
-                    <div class="inner-main-body p-2 p-sm-3 collapse forum-content{{forloop.counter}} show">
+                    <div class="inner-main-body p-2 p-sm-3 collapse forum-content show">
+
                         {% for discussion in all_dis %}
                         <div class="card mb-2">
                             <div class="card-body p-2 p-sm-3">
@@ -108,9 +112,9 @@
                                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
                                         class="mr-3 rounded-circle" width="50" alt="User" />
                                     <div class="media-body">
-                                        <h6><a href="#" data-toggle="collapse"
-                                                data-target=".forum-content{{forloop.counter}}"
-                                                class="text-body">{{discussion.title}}</a></h6>
+                                        <h6><a href="#" style="text-decoration: none;" data-toggle="modal"
+                                                data-target="#threadModal{{forloop.counter}}"
+                                                class="text-body stretched-link" onclick="showComments({{discussion.id | safe}})">{{discussion.title}}</a></h6>
                                         <p class="text-secondary">
                                             {{discussion.information | slice:":100"}}
                                         </p>
@@ -127,50 +131,114 @@
                             </div>
                         </div>
 
-                        <div class="inner-main-body p-2 p-sm-3 collapse forum-content{{forloop.counter}}">
-                            <a href="#" class="btn btn-light btn-sm mb-3 has-icon" data-toggle="collapse"
-                                data-target=".forum-content{{forloop.counter}}"><i
-                                    class="fa fa-arrow-left mr-2"></i>Back</a>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <div class="media forum-item">
-                                        <a href="javascript:void(0)" class="card-link">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                class="rounded-circle" width="50" alt="User" />
-                                        </a>
-                                        <div class="media-body ml-3">
-                                            <a href="javascript:void(0)" class="text-secondary">{{discussion.user}}</a>
-                                            <small
-                                                class="text-muted ml-2">{{discussion.timestamp | naturaltime}}</small>
-                                            <h5 class="mt-1">{{discussion.title}}</h5>
-                                            <div class="mt-3 font-size-sm">
-                                                <p>
-                                                    {{discussion.information}}
-                                                </p>
+                        <div class="modal fade" id="threadModal{{forloop.counter}}" tabindex="-1" role="dialog"
+                            aria-labelledby="threadModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <div class="media forum-item">
+                                                <div class="media-body ml-3">
+                                                    <a href="javascript:void(0)"
+                                                        class="text-secondary">{{discussion.user}}</a>
+                                                    <small
+                                                        class="text-muted ml-2">{{discussion.timestamp | naturaltime}}</small>
+                                                    <h5 class="mt-1">{{discussion.title}}</h5>
+                                                    <div class="mt-3 font-size-sm">
+                                                        <p>
+                                                            {{discussion.information}}
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- Displaying Phone numbers only if present -->
+
+                                                    {% if discussion.phone_nos %}
+
+                                                    <div class="mt-3 font-size-sm">
+                                                        <ul id="phone_num_list{{forloop.counter}}"
+                                                            style="padding-left: 0px;">
+
+                                                            <!-- Script to dynamically create li elements with the numbers -->
+
+                                                            <script>
+                                                                ul_list = document.getElementById("phone_num_list{{forloop.counter | safe}}")
+
+                                                                all_nums = "{{discussion.phone_nos}}".split(",")
+
+                                                                for (i = 0; i < all_nums.length; i++) {
+                                                                    $("#phone_num_list{{forloop.counter | safe}}").append(
+                                                                        `<li style="display: flex;font-size:15px">
+                                                                                <p><b>Phone number</b> - ${all_nums[i]}</p>
+                                                                                &nbsp;&nbsp;&nbsp;
+                                                                                <a style="color:black" href="tel:${all_nums[i]}">
+                                                                                    <i class="fas fa-phone"></i>
+                                                                                </a>
+                                                                                &nbsp;&nbsp;&nbsp;
+                                                                                <a style="color:black" href="sms:${all_nums[i]}">
+                                                                                    <i class="fas fa-sms"></i>
+                                                                                </a>
+                                                                            </li>`
+                                                                    )
+                                                                }
+                                                            </script>
+
+                                                        </ul>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    <!-- Displaying Blood Group if present -->
+
+                                                    <!-- We check if the value is not "select" because that is the default for "not choosing" -->
+
+                                                    {% if discussion.blood_grp != "Select" %}
+                                                    <div class="mt-3 font-size-sm">
+                                                        <p style="font-size:17px">
+                                                            <b> Blood Group </b> - {{discussion.blood_grp}}
+                                                        </p>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    <!-- Displaying google map link if available -->
+
+                                                    {% if discussion.map_link%}
+                                                    <div class="mt-3 font-size-sm">
+                                                        <p style="font-size:15px">
+                                                            <b>Google Map Link - </b>
+                                                            <a target="_blank" href="{{discussion.map_link}}">Link</a>
+                                                        </p>
+                                                    </div>
+                                                    {% endif %}
+                                                    <div class="mt-3 font-size-sm">
+                                                    <div class="user-comment">
+                                                        <div class="comments-section" id="CommentPanel{{discussion.id}}">
+                                                            <h5>Total Comments(0)</h5>
+                                                            <div class="comment-add">
+                                                                <div class="field-comment">
+                                                                    <textarea id="comment_area{{discussion.id}}" rows="4" cols="50"></textarea>
+                                                                    <a class="btn btn--blue btn--medium pull-right"
+                                                                        href="#" onclick="saveComment({{discussion.id | safe}})">Post Your Comment</a>
+                                                                </div>
+                                                            </div>
+                                                            <br><br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                </div>
+                                                <div class="small text-center">
+                                                    <span class="d-none d-sm-inline-block">Verified</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="text-muted small text-center">
-                                            <span class="d-none d-sm-inline-block"><i class="far fa-eye"></i> 19</span>
-                                            <span><i class="far fa-comment ml-2"></i> 3</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         {% endfor %}
 
-                        <ul class="pagination pagination-sm pagination-circle justify-content-center mb-0">
-                            <li class="page-item disabled">
-                                <span class="page-link has-icon"><i class="material-icons">chevron_left</i></span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                            <li class="page-item active"><span class="page-link">2</span></li>
-                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link has-icon" href="javascript:void(0)"><i
-                                        class="material-icons">chevron_right</i></a>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /Forum List -->
 
@@ -196,39 +264,67 @@
 
                                     <!-- Heading of the discussion -->
                                     <label for="heading">Heading</label>
-                                    <input type="text" name="title" class="form-control" id="heading" />
+                                    <input type="text" name="title" class="form-control" id="heading" required />
 
                                     <br>
 
                                     <!-- Main Information -->
                                     <label for="main_info">Information</label>
                                     <textarea id="main_info" class="form-control" name="main_info" id="" cols="20"
-                                        rows="6"></textarea>
+                                        rows="6" required></textarea>
 
                                     <br>
 
                                     <!-- Radio Button -->
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="distype" id="distype1">
+                                        <input class="form-check-input" type="radio" name="distype" id="distype1"
+                                            value="Help Needed">
                                         <label class="form-check-label" for="distype1">
                                             I Want Help
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="distype" id="distype2"
-                                            checked>
+                                            checked value="Helping">
                                         <label class="form-check-label" for="distype2">
                                             I Provide Help
                                         </label>
                                     </div>
                                     <br>
 
-                                    <h3>Select Related tag (Atleast One)</h3>
+                                    <label for="blood_group">Select Blood Group</label>
+                                    <select id="blood_group" name="blood_group"
+                                        class="custom-select custom-select-sm w-auto mr-1 mx-1" required>
+                                        <option selected="">Select</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+
+                                    <br>
+                                    <br>
+
+                                    <label for="ph_nos">Add Phone Numbers (Separated by comma ",") </label>
+                                    <input type="text" name="ph_nos" class="form-control" id="ph_nos" />
+
+                                    <br>
+
+                                    <label for="location">Google Maps Link of Location</label>
+                                    <input type="text" name="location" class="form-control" id="location" />
+
+                                    <br>
+
+                                    <h3>Select Related tags (Atleast One)</h3>
                                     <!-- Multi Select Drop down -->
 
                                     <div class="row d-flex justify-content-left mt-100">
                                         <div class="col-md-6"> <select id="choices-multiple-remove-button"
-                                                placeholder="Select only relevant" name="hashtags" multiple>
+                                                placeholder="Select only relevant" name="hashtags" multiple required>
                                                 <option value="Oxygen">Oxygen</option>
                                                 <option value="Medicine">Medicine</option>
                                                 <option value="Food">Food</option>
@@ -255,7 +351,6 @@
         </div>
     </div>
 
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 

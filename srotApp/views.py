@@ -1,23 +1,61 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from .models import *
+from django.core import serializers
 
 # Create your views here.
 
 def discussions(request):
     if request.method == "POST":
-        user = User.objects.filter(username="srot")[0]
         title = request.POST.get("title")
         dis_type= request.POST.get("distype")
         information = request.POST.get("main_info")
         hashtags = request.POST.get("hashtags")
+        blood_grp = request.POST.get("blood_group")
+        phone_nos = request.POST.get("ph_nos")
+        map_link = request.POST.get("location")
 
-        dis = Discussion(user=user,title=title,dis_type=dis_type,information=information,hashtags=hashtags)
+        dis = Discussion(user=request.user,title=title,dis_type=dis_type,information=information,hashtags=hashtags,blood_grp=blood_grp,phone_nos=phone_nos,map_link=map_link)
 
         dis.save()
 
     all_dis = Discussion.objects.all()
 
     return render(request,'discussions.html',{"all_dis":all_dis})
+
+def saveDiscussionComment(request):
+    dis_id = request.GET.get("dis_id")
+    given_comment = request.GET.get("comment")
+
+    parent_discussion = Discussion.objects.filter(id=dis_id)[0]
+
+    comm = DiscussionComment(parent_dis=parent_discussion,user=request.user.username,comment=given_comment)
+
+    comm.save()
+
+    return JsonResponse({"user_name":request.user.username})
+
+def showComments(request):
+    discussion_id = request.GET.get("dis_id")
+    parent_discussion = Discussion.objects.filter(id=discussion_id)[0]
+
+    params = {}
+
+    all_comments = DiscussionComment.objects.filter(parent_dis=parent_discussion)
+
+    # If there are no comments
+    if not all_comments:
+        params["has_comments"] = "no"
+    
+    # If there exists comments
+    else:
+        params["has_comments"] = "yes"
+
+        # We serialize data to pass it in json friendly format
+        params["all_comments"] = serializers.serialize('json',all_comments)
+
+    return JsonResponse(params)
+
 
 def sidebar(request):
     return render(request,'donations/sidebar.html')
@@ -33,7 +71,7 @@ def plasma(request):
         plasma_donor_gender = request.POST.get("plasma_donor_gender")
         plasma_donor_confirm = request.POST.get("plasma_donor_confirm")
 
-        plas = Plasma(plasma_donor_name=plasma_donor_name , plasma_donor_email= plasma_donor_email, plasma_donor_contact=plasma_donor_contact, plasma_donor_bloodgroup=plasma_donor_bloodgroup, plasma_donor_age=plasma_donor_age, plasma_donor_gender=plasma_donor_gender, plasma_donor_confirm=plasma_donor_confirm)
+        plas = Plasma(plasma_donor_name=plasma_donor_name , plasma_donor_email= plasma_donor_email, plasma_donor_contact=plasma_donor_contact, plasma_donor_bloodgroup=plasma_donor_bloodgroup, plasma_donor_age=plasma_donor_age, plasma_donor_gender=plasma_donor_gender, plasma_donor_confirm=plasma_donor_confirm,plasma_donor_city=plasma_donor_city)
         plas.save()
         
     all_plas = Plasma.objects.all()
