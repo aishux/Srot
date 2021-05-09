@@ -25,6 +25,10 @@
       <label for="cars">Distributor City: <label style="color:red;">*</label></label>
       <input placeholder="City" type="tel" tabindex="3" name="injection_lead_city" required autofocus>
     </fieldset>
+    <fieldset>
+      <label for="cars">Distributor Address <label style="color:red;">*</label></label>
+      <textarea id="w3review" name="injection_lead_address" rows="2" cols="20" required autofocus></textarea>
+    </fieldset>
 
     <fieldset class="form-inline">
       <label for="cars" class="form-inline">Drug Name : <label style="color:red;">*</label></label>
@@ -32,19 +36,19 @@
       <select name="injection_lead_drugname" id="cars" required>
         <option value="Remdesivir">Remdesivir</option>
         <option value="Tocilizumab">Tocilizumab</option>
-        <option value="Both">Both</option>
+        <option value="Remdesivir/Tocilizumab">Both</option>
         <option value="Other">Other</option>
       </select>
     </fieldset>
     
     <fieldset class="form-inline">
       <label for="cars">Is it verified by you? : <label style="color:red;">*</label></label><p></p>
-      <input type="radio" id="yes" name="injection_lead_verify" value="yes">
-      <label for="yes">Yes</label><br>
-      <input type="radio" id="no" name="injection_lead_verify" value="no">
-      <label for="no">No</label><br>
-      <input type="radio" id="dont know" name="injection_lead_verify" value="dont know">
-      <label for="dont know">Don't Know</label>
+      <input type="radio" id="yes" name="injection_lead_verify" value="Verified">
+      <label for="Verified">Yes</label><br>
+      <input type="radio" id="no" name="injection_lead_verify" value="Unverified">
+      <label for="Unverified">No</label><br>
+      <input type="radio" id="dont know" name="injection_lead_verify" value="Unverified">
+      <label for="Unverified">Don't Know</label>
     </fieldset>
 
      <fieldset>

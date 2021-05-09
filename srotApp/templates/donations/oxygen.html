@@ -25,14 +25,18 @@
       <label for="cars">City: <label style="color:red;">*</label></label>
       <input placeholder="City" type="tel" tabindex="3" name="oxygen_lead_city" required autofocus>
     </fieldset>
+    <fieldset>
+      <label for="cars">Address <label style="color:red;">*</label></label>
+      <textarea id="w3review" name="oxygen_lead_address" rows="2" cols="20" required autofocus></textarea>
+    </fieldset>
     
     <fieldset class="form-inline">
       <label for="cars">Is it verified by you? : <label style="color:red;">*</label></label><p></p>
-      <input type="radio" id="yes" name="oxygen_lead_verify" value="yes" required autofocus>
-      <label for="yes">Yes</label><br>
-      <input type="radio" id="no" name="oxygen_lead_verify" value="no" required autofocus>
+      <input type="radio" id="yes" name="oxygen_lead_verify" value="Verified" required autofocus>
+      <label for="Verified">Yes</label><br>
+      <input type="radio" id="no" name="oxygen_lead_verify" value="Unverified" required autofocus>
       <label for="no">No</label><br>
-      <input type="radio" id="dont know" name="oxygen_lead_verify" value="dont know" required autofocus>
+      <input type="radio" id="dont know" name="oxygen_lead_verify" value="Unverified" required autofocus>
       <label for="dont know">Don't Know</label>
     </fieldset>
 

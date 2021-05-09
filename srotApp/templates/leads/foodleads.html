@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Food Leads</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/media/css/cards.css">
+</head>
+
+<body>
+    
+    <div>
+        {% for food in foods %}
+        <div class="card">
+            <div class="card-text">
+                <div class="portada" style="background-image: url('/media/images/leads/food.jpg');">
+                </div>
+                <div class="title-total">
+                    <div class="title">
+                    </div>
+                    <br>
+                    <div class="service-type"><button class="btn warning">Food Supplier</button></div>
+                    <div class="service"><button class="btn info">Service : {{ food.food_supplier_service }} </button>
+                    </div>
+                    <div class="verified"><button class="btn success">{{ food.food_supplier_verify }}</button></div>
+                    <div class="contact"><button><i class="fas fa-phone"></i></button>{{ food.food_supplier_contact }}
+                    </div>
+                    <div class="location"><button><i
+                                class="fas fa-map-marker-alt"></i></button>{{ food.food_supplier_city }}</div>
+                    <h2>{{ food.food_supplier_name }}</h2>
+                    <div class="desc">{{food.food_supplier_address}}</div>
+                    <div class="actions">
+                        <button><i class="far fa-clone"></i></button>
+                        <button><i class="fab fa-whatsapp"></i></button>
+                        <button><i class="far fa-envelope"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+        <script src="" async defer></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drug Leads</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/media/css/cards.css">
+</head>
+
+<body>
+    
+    <div>
+        {% for inj in injs %}
+        <div class="card">
+            <div class="card-text">
+                <div class="portada"  style="background-image: url('/media/images/leads/injection.jpg');">
+                </div>
+                <div class="title-total">
+                    <div class="title">
+                    </div>
+                    <br>
+                    <div class="service-type"><button class="btn warning">Drugs</button></div>
+                    <div class="service"><button class="btn info">{{ inj.injection_lead_drugname }}</button>
+                    </div>
+                    <div class="verified"><button class="btn success">{{ inj.injection_lead_verify }}</button></div>
+                    <div class="contact"><button><i class="fas fa-phone"></i></button>{{ inj.injection_lead_contact }}
+                    </div>
+                    <div class="location"><button><i
+                                class="fas fa-map-marker-alt"></i></button>{{ inj.injection_lead_city }}</div>
+                    <h2>{{ inj.injection_lead_name }}</h2>
+                    <div class="desc">{{ inj.injection_lead_address }}</div>
+                    <div class="actions">
+                        <button><i class="far fa-clone"></i></button>
+                        <button><i class="fab fa-whatsapp"></i></button>
+                        <button><i class="far fa-envelope"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

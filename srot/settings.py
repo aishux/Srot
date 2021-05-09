@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'srotApp',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

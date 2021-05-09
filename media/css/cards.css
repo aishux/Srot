@@ -1,0 +1,237 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+body {
+  font-family: Roboto, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+}
+
+.card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 25px;
+  position: relative;
+  margin-top: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.card h2 {
+  margin-top: -30px;
+  padding: 0 1rem;
+}
+
+.card .contact {
+  padding: 1rem;
+  text-align: right;
+  color: green;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: -20px;
+  margin-right: 9px;
+
+}
+
+.card .location {
+    padding: 2rem;
+    text-align: left;
+    font-size: 18px;
+    margin-top: -80px;
+    margin-left: -25px;
+    
+  }
+
+  .card .service {
+    padding: inherit;
+    text-align: right;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: -87px;
+    margin-right: 100px;
+
+  }
+
+  .card .service-type {
+    padding: inherit;
+    text-align: left;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: -80px;
+    margin-right: 20px;
+    margin-left: -13px;
+    margin-bottom: -5px;
+
+  }
+
+  .card .verified {
+    padding: inherit;
+    text-align: right;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: -87px;
+
+  }
+
+.card .desc {
+  padding: 0.5rem 1rem;
+  font-size: 15px;
+  margin-right: 161px;
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+.card .actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+
+.card-text {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+}
+
+.title-total {
+  padding: 2.5em 1.5em 1.5em 1.5em;
+  font-size: 15px;
+}
+
+.title-total h3{
+    margin-left: 15px;
+    font-size: 15px;
+    color: green;
+  }
+
+path {
+  fill: white;
+}
+
+.img-portada {
+  width: 100%;
+}
+
+.portada {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-position: bottom center;
+  background-size: cover;
+}
+
+button {
+  border: none;
+  background: none;
+  font-size: 24px;
+  color: #8bc34a;
+  cursor: pointer;
+  transition: 0.5s;
+}
+button:hover {
+  color: #4CAF50;
+  transform: rotate(22deg);
+}
+
+.btn {
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius:25px;
+  }
+  
+  /* Green */
+  .success {
+    border-color: #04AA6D;
+    color: green;
+  }
+  
+  .success:hover {
+    background-color: #04AA6D;
+    color: white;
+  }
+
+  /* Blue */
+.info {
+    border-color: #2196F3;
+    color: dodgerblue;
+    margin-top: -100px;
+    margin-right: -15px;
+  }
+  
+  .info:hover {
+    background: #2196F3;
+    color: white;
+  }
+
+  /* Red */
+.danger {
+  border-color: #f44336;
+  color: #f44336;
+  margin-top: -100px;
+  margin-right: -15px;
+}
+
+.danger:hover {
+  background: #f44336;
+  color: white;
+}
+
+  /* Orange */
+.warning {
+    border-color: #ff9800;
+    color: orange;
+  }
+  
+  .warning:hover {
+    background: #ff9800;
+    color: white;
+  }
+
+.desc{
+  min-width: 400px;
+}
+
+@media(max-width:810px){
+  .portada{
+    display: none;
+  }
+  .card{
+    width: 100%;
+  }
+  .card-text{
+    display: block;
+  }
+  .desc{
+    margin-right: 0px !important;
+  }
+  body > div > div > div.title-total > h2{
+    padding-top: 1rem !important;
+  }
+}
+@media(max-width:345px){
+  .contact{
+    font-size: 13px !important;
+  }
+  .service-type button{
+    margin-left: -26px;
+  }
+
+  .service{
+    margin-right: 85px!important ;
+  }
+
+  .verified{
+    margin-right: -12px!important ;
+  }
+}

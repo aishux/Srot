@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import *
 from django.core import serializers
+from .filters import *
 
 # Create your views here.
 
@@ -71,7 +72,7 @@ def plasma(request):
         plasma_donor_gender = request.POST.get("plasma_donor_gender")
         plasma_donor_confirm = request.POST.get("plasma_donor_confirm")
 
-        plas = Plasma(plasma_donor_name=plasma_donor_name , plasma_donor_email= plasma_donor_email, plasma_donor_contact=plasma_donor_contact, plasma_donor_bloodgroup=plasma_donor_bloodgroup, plasma_donor_age=plasma_donor_age, plasma_donor_gender=plasma_donor_gender, plasma_donor_confirm=plasma_donor_confirm,plasma_donor_city=plasma_donor_city)
+        plas = Plasma(plasma_donor_name=plasma_donor_name , plasma_donor_email= plasma_donor_email, plasma_donor_contact=plasma_donor_contact, plasma_donor_bloodgroup=plasma_donor_bloodgroup, plasma_donor_age=plasma_donor_age, plasma_donor_gender=plasma_donor_gender.capitalize(), plasma_donor_confirm=plasma_donor_confirm,plasma_donor_city=plasma_donor_city.capitalize())
         plas.save()
         
     all_plas = Plasma.objects.all()
@@ -84,10 +85,11 @@ def oxygen(request):
         oxygen_lead_email = request.POST.get("oxygen_lead_email")
         oxygen_lead_contact = request.POST.get("oxygen_lead_contact")
         oxygen_lead_city = request.POST.get("oxygen_lead_city")
+        oxygen_lead_address = request.POST.get("oxygen_lead_address")
         oxygen_lead_verify = request.POST.get("oxygen_lead_verify")
         oxygen_lead_details = request.POST.get("oxygen_lead_details")
 
-        oxy = Oxygen(oxygen_lead_name=oxygen_lead_name, oxygen_lead_email=oxygen_lead_email, oxygen_lead_contact=oxygen_lead_contact, oxygen_lead_city=oxygen_lead_city, oxygen_lead_verify=oxygen_lead_verify, oxygen_lead_details=oxygen_lead_details)
+        oxy = Oxygen(oxygen_lead_name=oxygen_lead_name, oxygen_lead_email=oxygen_lead_email, oxygen_lead_contact=oxygen_lead_contact, oxygen_lead_city=oxygen_lead_city.capitalize(), oxygen_lead_address=oxygen_lead_address, oxygen_lead_verify=oxygen_lead_verify, oxygen_lead_details=oxygen_lead_details)
         oxy.save()
         
     all_oxy = Oxygen.objects.all()
@@ -100,11 +102,12 @@ def injections(request):
         injection_lead_email = request.POST.get("injection_lead_email")
         injection_lead_contact = request.POST.get("injection_lead_contact")
         injection_lead_city = request.POST.get("injection_lead_city")
+        injection_lead_address = request.POST.get("injection_lead_address")
         injection_lead_drugname = request.POST.get("injection_lead_drugname")
         injection_lead_verify = request.POST.get("injection_lead_verify")
         injection_lead_details = request.POST.get("injection_lead_details")
 
-        inj = Injection(injection_lead_name=injection_lead_name, injection_lead_email=injection_lead_email, injection_lead_contact=injection_lead_contact, injection_lead_city=injection_lead_city, injection_lead_drugname=injection_lead_drugname, injection_lead_verify=injection_lead_verify, injection_lead_details=injection_lead_details)
+        inj = Injection(injection_lead_name=injection_lead_name, injection_lead_email=injection_lead_email, injection_lead_contact=injection_lead_contact, injection_lead_city=injection_lead_city.capitalize(), injection_lead_address=injection_lead_address, injection_lead_drugname=injection_lead_drugname, injection_lead_verify=injection_lead_verify, injection_lead_details=injection_lead_details)
         inj.save()
         
     all_inj = Injection.objects.all()
@@ -117,11 +120,12 @@ def food(request):
         food_supplier_email = request.POST.get("food_supplier_email")
         food_supplier_contact = request.POST.get("food_supplier_contact")
         food_supplier_city = request.POST.get("food_supplier_city")
+        food_supplier_address = request.POST.get("food_supplier_address")
         food_supplier_service = request.POST.get("food_supplier_service")
         food_supplier_verify = request.POST.get("food_supplier_verify")
         food_supplier_details = request.POST.get("food_supplier_details")
 
-        food = Food(food_supplier_name=food_supplier_name, food_supplier_email=food_supplier_email, food_supplier_contact=food_supplier_contact, food_supplier_city=food_supplier_city, food_supplier_service=food_supplier_service, food_supplier_verify=food_supplier_verify, food_supplier_details=food_supplier_details)
+        food = Food(food_supplier_name=food_supplier_name, food_supplier_email=food_supplier_email, food_supplier_contact=food_supplier_contact, food_supplier_city=food_supplier_city.capitalize(), food_supplier_address=food_supplier_address, food_supplier_service=food_supplier_service, food_supplier_verify=food_supplier_verify, food_supplier_details=food_supplier_details)
         food.save()
         
     all_food = Food.objects.all()
@@ -138,8 +142,40 @@ def beds(request):
         hospital_verify = request.POST.get("hospital_verify")
         hospital_details = request.POST.get("hospital_details")
 
-        beds = Beds(hospital_name=hospital_name, hospital_contact=hospital_contact, hospital_city=hospital_city, hospital_address=hospital_address, hospital_beds=hospital_beds, hospital_verify=hospital_verify, hospital_details=hospital_details)
+        beds = Beds(hospital_name=hospital_name, hospital_contact=hospital_contact, hospital_city=hospital_city.capitalize(), hospital_address=hospital_address, hospital_beds=hospital_beds, hospital_verify=hospital_verify, hospital_details=hospital_details)
         beds.save()
     all_beds = Beds.objects.all()
 
     return render(request,'donations/beds.html',{"all_beds":all_beds})
+
+def tables(request):
+    all_food = Food.objects.all()
+    foodFilter = FoodFilter()
+    context = {'foods':all_food}
+    return render(request,'tables.html', context)
+
+def foodleads(request):
+    all_food = Food.objects.all()
+    foodFilter = FoodFilter()
+    context = {'foods':all_food}
+    return render(request,'leads/foodleads.html', context)
+
+def bedleads(request):
+    all_beds = Beds.objects.all()
+    context = {'beds':all_beds}
+    return render(request,'leads/bedleads.html', context)
+
+def injectionleads(request):
+    all_inj = Injection.objects.all()
+    context = {'injs':all_inj}
+    return render(request,'leads/injectionleads.html', context)
+
+def oxygenleads(request):
+    all_oxy = Oxygen.objects.all()
+    context = {'oxys':all_oxy}
+    return render(request,'leads/oxygenleads.html', context)
+
+def plasmaleads(request):
+    all_plasma = Plasma.objects.all()
+    context = {'plasmas':all_plasma}
+    return render(request,'leads/plasmaleads.html', context)

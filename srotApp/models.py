@@ -43,6 +43,7 @@ class Oxygen(models.Model):
     oxygen_lead_email = models.CharField(max_length=100)
     oxygen_lead_contact = models.CharField(max_length=100)
     oxygen_lead_city = models.CharField(max_length=100)
+    oxygen_lead_address = models.CharField(max_length=500)
     oxygen_lead_verify = models.CharField(max_length=100)
     oxygen_lead_details = models.CharField(max_length=500)
 
@@ -54,6 +55,7 @@ class Injection(models.Model):
     injection_lead_email = models.CharField(max_length=100)
     injection_lead_contact = models.CharField(max_length=100)
     injection_lead_city = models.CharField(max_length=100)
+    injection_lead_address = models.CharField(max_length=500)
     injection_lead_drugname = models.CharField(max_length=100)
     injection_lead_verify = models.CharField(max_length=100)
     injection_lead_details = models.CharField(max_length=500)
@@ -66,6 +68,7 @@ class Food(models.Model):
     food_supplier_email = models.CharField(max_length=100)
     food_supplier_contact = models.CharField(max_length=100)
     food_supplier_city = models.CharField(max_length=100)
+    food_supplier_address = models.CharField(max_length=500)
     food_supplier_service = models.CharField(max_length=100)
     food_supplier_verify = models.CharField(max_length=100)
     food_supplier_details = models.CharField(max_length=500)
