@@ -10,6 +10,7 @@ class Discussion(models.Model):
     blood_grp = models.CharField(max_length=50,blank=True,null=True)
     phone_nos = models.CharField(max_length=100,blank=True,null=True)
     map_link = models.CharField(max_length=1000,blank=True,null=True)
+    is_verified = models.CharField(choices=(("yes","Yes"),("no","No")),max_length=20,default="no")
     information = models.TextField()
     hashtags = models.TextField()
     timestamp = models.DateTimeField(default=tz.now)

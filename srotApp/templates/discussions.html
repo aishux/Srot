@@ -46,24 +46,63 @@
                                             <div class="simplebar-content" style="padding: 16px;">
                                                 <nav class="nav nav-pills nav-gap-y-1 flex-column">
                                                     <a href="javascript:void(0)"
-                                                        class="nav-link nav-link-faded has-icon active">All Threads</a>
+                                                        class="nav-link nav-link-faded has-icon active no_filter" id="no_filter" >All
+                                                        Discussions</a>
+                                                    <br>
+                                                    <label style="font-size: 15px;font-weight:600"><i
+                                                            class="fas fa-filter"></i>Select the below option for only
+                                                        Verified leads</label>
+
                                                     <a href="javascript:void(0)"
-                                                        class="nav-link nav-link-faded has-icon">Popular this week</a>
+                                                        class="nav-link nav-link-faded has-icon verified_filter" id="verified_filter"
+                                                        onclick="applyFilter('Verified',this)">Verified</a>
+
+                                                    <hr style="height:1px; width:100%; border-width:0px;background-color:black">
+
+                                                    <br>
+
+                                                    <label style="font-size: 15px;font-weight:600"><i
+                                                            class="fas fa-filter"></i>Select Any ONE of the
+                                                        below</label>
+
                                                     <a href="javascript:void(0)"
-                                                        class="nav-link nav-link-faded has-icon">Popular all time</a>
+                                                        class="nav-link nav-link-faded has-icon helping_filter" id="helping_filter"
+                                                        onclick="applyFilter('Helping',this)">Providing Help</a>
+
                                                     <a href="javascript:void(0)"
-                                                        class="nav-link nav-link-faded has-icon">Solved</a>
+                                                        class="nav-link nav-link-faded has-icon needhelp_filter" id="needhelp_filter"
+                                                        onclick="applyFilter('Needhelp',this)">Help Needed</a>
+
+                                                    <hr
+                                                        style="height:1px; width:100%; border-width:0px;background-color:black">
+                                                    <br>
+
+                                                    <label style="font-size: 15px;font-weight:600"><i
+                                                            class="fas fa-filter"></i>Select Any of the below</label>
+
                                                     <a href="javascript:void(0)"
-                                                        class="nav-link nav-link-faded has-icon">Unsolved</a>
+                                                        class="nav-link nav-link-faded has-icon food_filter" id="food_filter"
+                                                        onclick="applyFilter('Food',this)">Food</a>
+
                                                     <a href="javascript:void(0)"
-                                                        class="nav-link nav-link-faded has-icon">No replies yet</a>
+                                                        class="nav-link nav-link-faded has-icon plasma_filter" id="plasma_filter"
+                                                        onclick="applyFilter('Plasma',this)">Plasma</a>
+
+                                                    <a href="javascript:void(0)"
+                                                        class="nav-link nav-link-faded has-icon beds_filter" id="beds_filter"
+                                                        onclick="applyFilter('Beds',this)">Beds</a>
+
+                                                    <a href="javascript:void(0)"
+                                                        class="nav-link nav-link-faded has-icon medicine_filter" id="medicine_filter"
+                                                        onclick="applyFilter('Medicine',this)">Medicine</a>
+
                                                 </nav>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="simplebar-placeholder" style="width: 234px; height: 292px;"></div>
                             </div>
+                            
                             <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
                                 <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
                             </div>
@@ -80,23 +119,17 @@
                 <!-- Inner main -->
                 <div class="inner-main">
                     <!-- Inner main header -->
-                    <div class="inner-main-header">
+
+                    <div class="inner-main-header" style="justify-content: space-between;">
                         <button class="btn btn-primary has-icon btn-block d-md-none" type="button" data-toggle="modal"
-                            data-target="#threadModal" style="padding: 0px;">
-                            + NEW DISCUSSION
+                            data-target="#threadModal" style="padding: 0px;font-size: 12px;width:34%">
+                            NEW DISCUSSION
                         </button>
-                        <select class="custom-select custom-select-sm w-auto mr-1 mx-1">
-                            <option selected="">Latest</option>
-                            <option value="1">Popular</option>
-                            <option value="3">Solved</option>
-                            <option value="3">Unsolved</option>
-                            <option value="3">No Replies Yet</option>
-                        </select>
-                        <span class="input-icon input-icon-sm ml-auto w-auto">
-                            <input type="text"
-                                class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-4 mt-4"
-                                placeholder="Search forum" />
-                        </span>
+                        <button class="btn btn-primary has-icon btn-block d-md-none" type="button" data-toggle="modal"
+                            data-target="#filterModal"
+                            style="padding: 0px;font-size: 14.4px;width:34%;margin-top: 0.2rem;">
+                            APPLY FILTERS
+                        </button>
                     </div>
                     <!-- /Inner main header -->
 
@@ -107,25 +140,48 @@
 
                         {% for discussion in all_dis %}
                         <div class="card mb-2">
-                            <div class="card-body p-2 p-sm-3">
+                            <div class="card-body p-2 p-sm-3" style="padding-bottom: 0px !important">
                                 <div class="media forum-item">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                        class="mr-3 rounded-circle" width="50" alt="User" />
+                                    <img src="/media/images/discussion/help.png" class="mr-3 rounded-circle" width="50" alt="power" />
                                     <div class="media-body">
-                                        <h6><a href="#" style="text-decoration: none;" data-toggle="modal"
-                                                data-target="#threadModal{{forloop.counter}}"
-                                                class="text-body stretched-link" onclick="showComments({{discussion.id | safe}})">{{discussion.title}}</a></h6>
+                                        <h6><a href="javascript:void(0)" style="text-decoration: none;word-break: break-word;"
+                                                data-toggle="modal" data-target="#threadModal{{forloop.counter}}"
+                                                class="text-body stretched-link"
+                                                onclick="showComments({{discussion.id | safe}})">{{discussion.title}}</a>
+                                        </h6>
                                         <p class="text-secondary">
                                             {{discussion.information | slice:":100"}}
                                         </p>
-                                        <p class="text-muted"><a href="javascript:void(0)">{{discussion.user}}</a> added
+                                        <!-- Displaying the hastags -->
+                                        <div class="choices__list choices__list--multiple"
+                                            id="display_hashtags{{forloop.counter}}">
+
+                                            <script>
+                                                all_hastags = "{{discussion.hashtags | safe}}".split(",")
+                                                for (i = 0; i < all_hastags.length; i++) {
+                                                    $("#display_hashtags{{forloop.counter | safe}}").append(`
+                                                    <div class="choices__item choices__item--selectable" data-item="" data-id="${i}" data-value="${all_hastags[i]}" data-custom-properties="null" data-deletable="" aria-selected="true" style="padding-right: 9px;">
+                                                        ${all_hastags[i]}
+                                                        </div>
+                                                    `)
+                                                }
+                                            </script>
+                                        </div>
+                                        <p class="text-muted" style="font-size: 12px;padding-top:3px;"><a
+                                                href="javascript:void(0)" style="color:black">{{discussion.user}}</a>
+                                            added
                                             <span
                                                 class="text-secondary font-weight-bold">{{discussion.timestamp | naturaltime}}</span>
                                         </p>
                                     </div>
-                                    <div class="text-muted small text-center align-self-center">
-                                        <span class="d-none d-sm-inline-block"><i class="far fa-eye"></i> 19</span>
-                                        <span><i class="far fa-comment ml-2"></i> 3</span>
+                                    <div class="text-muted small text-center">
+                                        {% if discussion.is_verified == "no" %}
+                                        <button type="button" style="border-radius: 10%;"
+                                            class="btn btn-outline-warning">Unverified</button>
+                                        {% else %}
+                                        <button type="button" style="border-radius: 20%;"
+                                            class="btn btn-outline-success">Verified</button>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +191,11 @@
                             aria-labelledby="threadModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                    </div>
                                     <div class="card mb-2">
                                         <div class="card-body">
                                             <div class="media forum-item">
@@ -209,27 +270,40 @@
                                                     </div>
                                                     {% endif %}
                                                     <div class="mt-3 font-size-sm">
-                                                    <div class="user-comment">
-                                                        <div class="comments-section" id="CommentPanel{{discussion.id}}">
-                                                            <h5>Total Comments(0)</h5>
-                                                            <div class="comment-add">
-                                                                <div class="field-comment">
-                                                                    <textarea id="comment_area{{discussion.id}}" rows="4" cols="50"></textarea>
-                                                                    <a class="btn btn--blue btn--medium pull-right"
-                                                                        href="#" onclick="saveComment({{discussion.id | safe}})">Post Your Comment</a>
+                                                        <div class="user-comment">
+                                                            <div class="comments-section"
+                                                                id="CommentPanel{{discussion.id}}">
+                                                                <h5>Total Comments(0)</h5>
+                                                                <div class="comment-add">
+                                                                    <div class="field-comment">
+                                                                        <textarea id="comment_area{{discussion.id}}"
+                                                                            rows="4" cols="50"></textarea>
+                                                                        <a class="btn btn--blue btn--small pull-right"
+                                                                            href="javascript:void(0)"
+                                                                            onclick="saveComment({{discussion.id | safe}})">Post
+                                                                            Your Comment</a>
+                                                                    </div>
                                                                 </div>
+                                                                <br><br>
                                                             </div>
-                                                            <br><br>
                                                         </div>
                                                     </div>
-                                                </div>
 
 
 
                                                 </div>
                                                 <div class="small text-center">
-                                                    <span class="d-none d-sm-inline-block">Verified</span>
+                                                    {% if discussion.is_verified == "no" %}
+                                                    <button type="button" style="border-radius: 10%;"
+                                                        class="btn btn-outline-warning">Unverified</button>
+                                                    {% else %}
+                                                    <button type="button" style="border-radius: 20%;"
+                                                        class="btn btn-outline-success">Verified</button>
+                                                    {% endif %}
                                                 </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -238,6 +312,73 @@
                         </div>
 
                         {% endfor %}
+                        <div class="pagination__wrapper">
+                            <ul class="pagination">
+
+                                <!-- We show previous pages except for 1st page -->
+                                {% if actual_page != 1 %}
+
+                                <li>
+                                    <a href="javascript:void(0)" onclick="changePage({{prev}})"><button class="prev"
+                                            title="previous page">&#10094;</button></a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0)" onclick="changePage(1)"><button
+                                            title="first page - page 1">1</button></a>
+                                </li>
+
+                                <!-- If we are on second page then no use of showing prev as it is 1 -->
+
+                                {% if actual_page != 2 %}
+
+                                <li>
+                                    <span>...</span>
+                                </li>
+
+
+                                <li>
+                                    <a href="javascript:void(0)" onclick="changePage({{prev}})"><button
+                                            title="page {{prev}}">{{prev}}</button></a>
+                                </li>
+
+                                {% endif %}
+
+                                {% endif %}
+
+                                <li>
+                                    <a href="javascript:void(0)" onclick="changePage({{actual_page}})"><button
+                                            class="active"
+                                            title="current page - page {{actual_page}}">{{actual_page}}</button>
+                                </li>
+
+                                <!-- We show next pages except for the last one -->
+                                {% if actual_page != last_page %}
+
+                                <!-- If we are on 2nd last page then by default the last page is next -->
+
+                                {% if actual_page != last_page|add:"-1" %}
+                                <li>
+                                    <a href="javascript:void(0)" onclick="changePage({{next}})"><button
+                                            title="page {{next}}">{{next}}</button></a>
+                                </li>
+                                <li>
+                                    <span>...</span>
+                                </li>
+                                {% endif %}
+
+                                <li>
+                                    <a href="javascript:void(0)" onclick="changePage({{last_page}})"><button
+                                            title="last page - page {{last_page}}">{{last_page}}</button></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="changePage({{next}})"><button class="next"
+                                            title="next page">&#10095;</button></a>
+                                </li>
+
+                                {% endif %}
+                            </ul>
+                        </div>
 
                     </div>
                     <!-- /Forum List -->
@@ -246,6 +387,72 @@
                 </div>
                 <!-- /Inner main -->
             </div>
+
+            <!-- Filters modal -->
+            <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModal"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <nav class="nav nav-pills nav-gap-y-1 flex-column">
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon active no_filter" id="no_filter">All
+                                Discussions</a>
+                            <br>
+                            <label style="font-size: 15px;font-weight:600"><i
+                                    class="fas fa-filter"></i>Select the below option for only
+                                Verified leads</label>
+
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon verified_filter" id="verified_filter"
+                                onclick="applyFilter('Verified',this)">Verified</a>
+
+                            <hr
+                                style="height:1px; width:100%; border-width:0px;background-color:black">
+
+                            <br>
+
+                            <label style="font-size: 15px;font-weight:600"><i
+                                    class="fas fa-filter"></i>Select Any ONE of the
+                                below</label>
+
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon helping_filter" id="helping_filter"
+                                onclick="applyFilter('Helping',this)">Providing Help</a>
+
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon needhelp_filter" id="needhelp_filter"
+                                onclick="applyFilter('Needhelp',this)">Help Needed</a>
+
+                            <hr
+                                style="height:1px; width:100%; border-width:0px;background-color:black">
+                            <br>
+
+                            <label style="font-size: 15px;font-weight:600"><i
+                                    class="fas fa-filter"></i>Select Any of the below</label>
+
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon food_filter" id="food_filter"
+                                onclick="applyFilter('Food',this)">Food</a>
+
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon plasma_filter" id="plasma_filter"
+                                onclick="applyFilter('Plasma',this)">Plasma</a>
+
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon beds_filter" id="beds_filter"
+                                onclick="applyFilter('Beds',this)">Beds</a>
+
+                            <a href="javascript:void(0)"
+                                class="nav-link nav-link-faded has-icon medicine_filter" id="medicine_filter"
+                                onclick="applyFilter('Medicine',this)">Medicine</a>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- /Filters modal -->
 
             <!-- New Thread Modal -->
             <div class="modal fade" id="threadModal" tabindex="-1" role="dialog" aria-labelledby="threadModalLabel"
@@ -265,6 +472,25 @@
                                     <!-- Heading of the discussion -->
                                     <label for="heading">Heading</label>
                                     <input type="text" name="title" class="form-control" id="heading" required />
+
+                                    <br><br>
+
+                                    <!-- verification Button -->
+                                    <label>Is the Discussion Verified</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="verify_status" id="verified"
+                                            value="yes">
+                                        <label class="form-check-label" for="verified">
+                                            Yes
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="verify_status"
+                                            id="unverified" checked value="no">
+                                        <label class="form-check-label" for="unverified">
+                                            No
+                                        </label>
+                                    </div>
 
                                     <br>
 
@@ -319,7 +545,7 @@
 
                                     <br>
 
-                                    <h3>Select Related tags (Atleast One)</h3>
+                                    <label>Select Discussion Related tags (Atleast One)</label>
                                     <!-- Multi Select Drop down -->
 
                                     <div class="row d-flex justify-content-left mt-100">
@@ -328,6 +554,8 @@
                                                 <option value="Oxygen">Oxygen</option>
                                                 <option value="Medicine">Medicine</option>
                                                 <option value="Food">Food</option>
+                                                <option value="Plasma">Plasma</option>
+                                                <option value="Bed">Beds</option>
                                             </select>
                                         </div>
                                     </div>
@@ -353,8 +581,9 @@
 
     <script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
-
+    <script src="https://use.typekit.net/tqi0rfb.js"></script>
     <script src="/media/js/discussion.js"></script>
+
 </body>
 
 </html>

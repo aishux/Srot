@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .models import *
 from django.core import serializers
 from .filters import *
+from django.db.models import Q
 
 # Create your views here.
 
@@ -15,14 +16,76 @@ def discussions(request):
         blood_grp = request.POST.get("blood_group")
         phone_nos = request.POST.get("ph_nos")
         map_link = request.POST.get("location")
+        is_verified = request.POST.get("verify_status")
 
-        dis = Discussion(user=request.user,title=title,dis_type=dis_type,information=information,hashtags=hashtags,blood_grp=blood_grp,phone_nos=phone_nos,map_link=map_link)
+        dis = Discussion(user=request.user,title=title,dis_type=dis_type,information=information,hashtags=hashtags,blood_grp=blood_grp,phone_nos=phone_nos,map_link=map_link,is_verified=is_verified)
 
         dis.save()
 
-    all_dis = Discussion.objects.all()
+    params = {}
 
-    return render(request,'discussions.html',{"all_dis":all_dis})
+
+    # Get the page number passed in the url
+    page_no = int(request.GET.get('page','1').replace("?",""))
+    hashtag_filters = request.GET.get('tags',"")
+
+    query = Q()
+
+    if "Food" in hashtag_filters:
+        query.add(Q(hashtags__icontains="Food"),Q.OR)
+    
+    if "Plasma" in hashtag_filters:
+        query.add(Q(hashtags__icontains="Plasma"),Q.OR)
+    
+    if "Beds" in hashtag_filters:
+        query.add(Q(hashtags__icontains="Beds"),Q.OR)
+
+    if "Medicine" in hashtag_filters:
+        query.add(Q(hashtags__icontains="Medicine"),Q.OR)
+    
+    if "Needhelp" in hashtag_filters:
+        query.add(Q(dis_type="Help Needed"),Q.AND)
+    
+    elif "Helping" in hashtag_filters:
+        query.add(Q(dis_type="Helping"),Q.AND)
+
+    if "Verified" in hashtag_filters:
+        query.add(Q(is_verified="yes"),Q.AND)
+
+    filtered_discussions = Discussion.objects.filter(query)
+
+    discussion_count = len(filtered_discussions)
+    total_pages = discussion_count // 10
+    if discussion_count % 10 != 0:
+        total_pages += 1
+    
+
+    if page_no == 1:
+        params["prev"] = ""
+        params["actual_page"] = page_no
+        params["next"] = min(page_no+1,total_pages)
+        params["last_page"] = total_pages
+    
+    elif page_no == total_pages:
+        params["prev"] = max(page_no-1,1)
+        params["actual_page"] = page_no
+        params["next"] = ""
+        params["last_page"] = total_pages
+
+    else:
+        params["prev"] = max(page_no-1,1)
+        params["actual_page"] = page_no
+        params["next"] = min(page_no+1,total_pages)
+        params["last_page"] = total_pages
+
+    # Display 10 discussion per page
+    from_range,to_range = (page_no-1)*10, page_no*10
+
+    all_dis = filtered_discussions.order_by('-id')[from_range:to_range]
+
+    params["all_dis"] = all_dis
+    return render(request,'discussions.html',params)
+
 
 def saveDiscussionComment(request):
     dis_id = request.GET.get("dis_id")
