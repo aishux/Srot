@@ -74,7 +74,7 @@ body {
     text-align: right;
     font-weight: bold;
     font-size: 18px;
-    margin-top: -87px;
+    margin-top: -95px;
 
   }
 
@@ -96,7 +96,7 @@ body {
 
 .card-text {
   display: grid;
-  grid-template-columns: 0.5fr 2fr;
+  grid-template-columns: 0.7fr 2fr !important;
 }
 
 .title-total {
@@ -165,7 +165,7 @@ button:hover {
 .info {
     border-color: #2196F3;
     color: dodgerblue;
-    margin-top: -100px;
+    margin-top: -10px;
     margin-right: -15px;
   }
   
@@ -178,7 +178,7 @@ button:hover {
 .danger {
   border-color: #f44336;
   color: #f44336;
-  margin-top: -100px;
+  margin-top: -10px;
   margin-right: -15px;
 }
 
