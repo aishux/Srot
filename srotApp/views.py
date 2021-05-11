@@ -242,3 +242,6 @@ def plasmaleads(request):
     all_plasma = Plasma.objects.all()
     context = {'plasmas':all_plasma}
     return render(request,'leads/plasmaleads.html', context)
+
+def filter(request):
+    return render(request,'leads/filter.html')

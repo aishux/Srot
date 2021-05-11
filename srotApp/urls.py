@@ -18,4 +18,5 @@ urlpatterns = [
     path('leads/injectionleads',views.injectionleads,name="injectionleads"),
     path('leads/oxygenleads',views.oxygenleads,name="oxygenleads"),
     path('leads/plasmaleads',views.plasmaleads,name="plasmaleads"),
+    path('leads/filter',views.filter,name="filter"),
 ]
