@@ -12,11 +12,11 @@ urlpatterns = [
     path('donations/injections/',views.injections,name="injections"),
     path('donations/food/',views.food,name="food"),
     path('donations/beds/',views.beds,name="beds"),
-    path('tables',views.tables,name="tables"),
     path('leads/foodleads',views.foodleads,name="foodleads"),
     path('leads/bedleads',views.bedleads,name="bedleads"),
     path('leads/injectionleads',views.injectionleads,name="injectionleads"),
     path('leads/oxygenleads',views.oxygenleads,name="oxygenleads"),
     path('leads/plasmaleads',views.plasmaleads,name="plasmaleads"),
     path('leads/filter',views.filter,name="filter"),
+    path('',views.home,name="home"),
 ]

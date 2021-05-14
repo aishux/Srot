@@ -211,12 +211,6 @@ def beds(request):
 
     return render(request,'donations/beds.html',{"all_beds":all_beds})
 
-def tables(request):
-    all_food = Food.objects.all()
-    foodFilter = FoodFilter()
-    context = {'foods':all_food}
-    return render(request,'tables.html', context)
-
 def foodleads(request):
     all_food = Food.objects.all()
     foodFilter = FoodFilter()
@@ -245,3 +239,7 @@ def plasmaleads(request):
 
 def filter(request):
     return render(request,'leads/filter.html')
+
+def home(request):
+    return render(request,'home.html')
+
