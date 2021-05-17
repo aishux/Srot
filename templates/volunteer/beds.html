@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beds Availablity</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/media/css/volunteer.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/media/js/volunteer.js"></script>
+
+
+</head>
+
+<body> 
+
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Beds <b>Availablity</b></h2>
+                </div>
+                <div class="col-sm-6">
+                    <div class="btn-group" data-toggle="buttons">
+
+                        <label class="btn btn-info active">
+                            <input type="radio" name="status" value="all" checked="checked"> All
+                        </label>
+                        <label class="btn btn-success">
+                            <input type="radio" name="status" value="active"> Verified
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="status" value="expired"> Unverified
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Hospital Name</th>
+                    <th>Hospital Contact</th>
+                    <th>Hospital City</th>
+                    <th>Hospital Address</th>
+                    <th>Number of Beds</th>
+                    <th>Status</th>
+                    <th>Verification</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bed in beds %}
+                {% if  bed.volunteer_verify == "Verified" %}
+                <tr data-status="active">
+                    <td style="color: #FFAE42;">Beds</td>
+                    <td>{{ bed.hospital_name }}</td>
+                    <td>{{ bed.hospital_contact }}</td>
+                    <td>{{ bed.hospital_city }}</td>
+                    <td>{{bed.hospital_address}}</td>
+                    <td>{{ bed.hospital_beds }}</td>
+                    <td>{{ bed.volunteer_verify }}</td>
+                    <td><a href="{% url 'verifyLead' resource='Beds' id=bed.id %}" class="btn btn-sm manage">Verify</a></td>
+                    <td><a href="#" class="btn open-form" id="e{{bed.id}}" onclick="edithospital(this.id)"
+                            style="color:white;">Edit</a></td>
+                    <td><a href="{% url 'deleteLead' resource='Beds' id=bed.id %}" class="btn btn-sm manage">Delete</a></td>   
+                </tr>
+                {% else %}
+                <tr data-status="expired">
+                    <td style="color: #FFAE42;">Beds</td>
+                    <td>{{ bed.hospital_name }}</td>
+                    <td>{{ bed.hospital_contact }}</td>
+                    <td>{{ bed.hospital_city }}</td>
+                    <td>{{bed.hospital_address}}</td>
+                    <td>{{ bed.hospital_beds }}</td>
+                    <td>{{ bed.volunteer_verify }}</td>
+                    <td><a href="{% url 'verifyLead' resource='Beds' id=bed.id %}" class="btn btn-sm manage">Verify</a></td>
+                    <td><a href="#" class="btn open-form" id="e{{bed.id}}" onclick="edithospital(this.id)"
+                            style="color:white;">Edit</a></td>
+                    <td><a href="{% url 'deleteLead' resource='Beds' id=bed.id %}" class="btn btn-sm manage">Delete</a></td>  
+                </tr>
+                {% endif %}
+                {% endfor %}
+
+                <div class="form-popup">
+                    <div class="container form-wrapper">
+                        <button class="btn close-form">Close</button>
+                        <form id="my-form" novalidate="novalidate" action="{% url 'edithospital' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" id="form_id" hidden name="form_id">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <h1 class="form-title">Beds Availablity</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Hospital Name</label>
+                                    <input type="text" class="form-control" id="hospital_name"
+                                        name="hospital_name" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Hospital Contact</label>
+                                    <input type="text" class="form-control" id="hospital_contact"
+                                        name="hospital_contact" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Hospital City</label>
+                                    <input type="text" class="form-control" id="hospital_city"
+                                        name="hospital_city" required="">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="email">Hospital Address</label>
+                                    <textarea type="text" class="form-control" id="hospital_address"
+                                        name="hospital_address" required=""></textarea>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="email">Number of Beds</label><br>
+                                    <input type="radio" id="hospital_beds_dn" name="hospital_beds"
+                                        value="Don't Know">
+                                    <label for="hospital_beds">Don't Know</label><br>
+                                    <input type="radio" id="hospital_beds_ten" name="hospital_beds"
+                                        value="1-10">
+                                    <label for="hospital_beds">1-10</label><br>
+                                    <input type="radio" id="hospital_beds_twenty" name="hospital_beds"
+                                        value="11-20">
+                                    <label for="hospital_beds">11-20</label><br>
+                                    <input type="radio" id="hospital_beds_more" name="hospital_beds"
+                                        value="20+">
+                                    <label for="hospital_beds">20 and above</label><br>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="email">User Verification</label><br>
+                                    <input type="radio" id="hospital_verify_verified" name="hospital_verify"
+                                        value="Verified">
+                                    <label for="Verified">Verified</label><br>
+                                    <input type="radio" id="hospital_verify_unverified" name="hospital_verify"
+                                        value="Unverified">
+                                    <label for="Unverified">Unverified</label><br>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="verify">Volunteer Verification</label><br>
+                                    <input type="radio" id="hospital_vol_verify" name="hospital_vol_verify"
+                                        value="Verified">
+                                    <label for="hospital_vol_verify">Verified</label><br>
+                                    <input type="radio" id="hospital_vol_unverify" name="hospital_vol_verify"
+                                        value="Unverified">
+                                    <label for="hospital_vol_unverify">Unverified</label><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="something">Additional Details</label>
+                                    <textarea name="hospital_details" class="form-control"
+                                        id="hospital_details"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn send-form">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.getElementById("hospital_verify_verified").disabled = true;
+    document.getElementById("hospital_verify_unverified").disabled = true;
+
+    function edithospital(id) {
+        console.log(id)
+        $.ajax({
+            type: 'GET',
+            url: {% url 'edithospital' %},
+            data: {
+            'hospital_id': id
+        },
+
+        })
+        .success(function (data) {
+            var details = data.details[0]
+            $('#form_id').val(details.id)
+            $('#hospital_name').val(details.hospital_name)
+            $('#hospital_contact').val(details.hospital_contact)
+            $('#hospital_city').val(details.hospital_city)
+            $('#hospital_address').val(details.hospital_address)
+            $('#hospital_details').val(details.hospital_details)
+
+            if (details.hospital_verify == 'Verified') {
+                $('#hospital_verify_verified').prop('checked', true)
+            }
+            else {
+                $('#hospital_verify_unverified').prop('checked', true)
+            }
+
+            if (details.hospital_beds == "Don't Know") {
+                $('#hospital_beds_dn').prop('checked', true)
+            }
+            else if (details.hospital_beds == '1-10') {
+                $('#hospital_beds_ten').prop('checked', true)
+            }
+            else if (details.hospital_beds == '11-20') {
+                $('#hospital_beds_twenty').prop('checked', true)
+            }
+            else {
+                $('#hospital_beds_more').prop('checked', true)
+            }
+
+            if (details.volunteer_verify == 'Verified') {
+                $('#hospital_vol_verify').prop('checked', true)
+            }
+            else {
+                $('#hospital_vol_unverify').prop('checked', true)
+            }
+        })
+    }
+
+</script>
+</body>
+
+</html>
+

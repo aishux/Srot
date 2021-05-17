@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Food Leads</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/media/css/volunteer.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/media/js/volunteer.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Food <b>Leads</b></h2>
+                </div>
+                <div class="col-sm-6">
+                    <div class="btn-group" data-toggle="buttons">
+
+                        <label class="btn btn-info active">
+                            <input type="radio" name="status" value="all" checked="checked"> All
+                        </label>
+                        <label class="btn btn-success">
+                            <input type="radio" name="status" value="active"> Verified
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="status" value="expired"> Unverified
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Charges</th>
+                    <th>Status</th>
+                    <th>Verification</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in foods %}
+                {% if  food.volunteer_verify == "Verified" %}
+                <tr data-status="active">
+                    <td style="color: #FFAE42;">Food</td>
+                    <td>{{ food.food_supplier_name }}</td>
+                    <td>{{ food.food_supplier_city }}</td>
+                    <td>{{ food.food_supplier_contact }}</td>
+                    <td>{{food.food_supplier_address}}</td>
+                    <td>{{ food.food_supplier_service }}</td>
+                    <td>{{ food.volunteer_verify }}</td>
+                    <td><a href="{% url 'verifyLead' resource='Food' id=food.id %}" class="btn btn-sm manage">Verify</a></td>
+                    <td><a href="#" class="btn open-form" id="e{{food.id}}" onclick="editfood(this.id)"
+                            style="color:white;">Edit</a></td>
+                    <td><a href="{% url 'deleteLead' resource='Food' id=food.id %}" class="btn btn-sm manage"
+                            name="deletefood">Delete</a></td>
+                </tr>
+                {% else %}
+                <tr data-status="expired">
+                    <td style="color: #FFAE42;">Food</td>
+                    <td>{{ food.food_supplier_name }}</td>
+                    <td>{{ food.food_supplier_city }}</td>
+                    <td>{{ food.food_supplier_contact }}</td>
+                    <td>{{food.food_supplier_address}}</td>
+                    <td>{{ food.food_supplier_service }}</td>
+                    <td>{{ food.volunteer_verify }}</td>
+                    <td><a href="{% url 'verifyLead' resource='Food' id=food.id %}" class="btn btn-sm manage">Verify</a></td>
+                    <td><a href="#" class="btn open-form" id="e{{food.id}}" onclick="editfood(this.id)"
+                            style="color:white;">Edit</a></td>
+                    <td><a href="{% url 'deleteLead' resource='Food' id=food.id %}" class="btn btn-sm manage" type="submit"
+                            name="deletefood">Delete</a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+
+                <div class="form-popup">
+                    <div class="container form-wrapper">
+                        <button class="btn close-form">Close</button>
+                        <form id="my-form" novalidate="novalidate" action="{% url 'editfood' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" id="form_id" hidden name="form_id">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <h1 class="form-title">Food Supplier Details</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="food_supplier_name"
+                                        name="food_supplier_name" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" class="form-control" id="food_supplier_email"
+                                        name="food_supplier_email" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Contact</label>
+                                    <input type="text" class="form-control" id="food_supplier_contact"
+                                        name="food_supplier_contact" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">City</label>
+                                    <input type="text" class="form-control" id="food_supplier_city"
+                                        name="food_supplier_city" required="">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="email">Address</label>
+                                    <textarea type="text" class="form-control" id="food_supplier_address"
+                                        name="food_supplier_address" required=""></textarea>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="email">Service Type</label><br>
+                                    <input type="radio" id="food_supplier_service_free" name="food_supplier_service"
+                                        value="Free">
+                                    <label for="food_supplier_service_free">Free</label><br>
+                                    <input type="radio" id="food_supplier_service_paid" name="food_supplier_service"
+                                        value="Paid">
+                                    <label for="food_supplier_service_paid">Paid</label><br>
+                                    <input type="radio" id="food_supplier_service_dn" name="food_supplier_service"
+                                        value="Don't Know">
+                                    <label for="food_supplier_service_dn">Don't Know</label><br>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="email">User Verification</label><br>
+                                    <input type="radio" id="food_supplier_verify_verified" name="food_supplier_verify"
+                                        value="Verified">
+                                    <label for="Verified">Verified</label><br>
+                                    <input type="radio" id="food_supplier_verify_unverified" name="food_supplier_verify"
+                                        value="Unverified">
+                                    <label for="Unverified">Unverified</label><br>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="verify">Volunteer Verification</label><br>
+                                    <input type="radio" id="food_supplier_vol_verify" name="food_supplier_vol_verify"
+                                        value="Verified">
+                                    <label for="food_supplier_vol_verify">Verified</label><br>
+                                    <input type="radio" id="food_supplier_vol_unverify" name="food_supplier_vol_verify"
+                                        value="Unverified">
+                                    <label for="food_supplier_vol_unverify">Unverified</label><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="something">Additional Details</label>
+                                    <textarea name="food_supplier_details" class="form-control"
+                                        id="food_supplier_details"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn send-form">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.getElementById("food_supplier_verify_verified").disabled = true;
+    document.getElementById("food_supplier_verify_unverified").disabled = true;
+
+    function editfood(id) {
+        console.log(id)
+        $.ajax({
+            type: 'GET',
+            url: {% url 'editfood' %},
+            data: {
+            'food_id': id
+        },
+
+        })
+        .success(function (data) {
+            var details = data.details[0]
+            $('#form_id').val(details.id)
+            $('#food_supplier_name').val(details.food_supplier_name)
+            $('#food_supplier_email').val(details.food_supplier_email)
+            $('#food_supplier_contact').val(details.food_supplier_contact)
+            $('#food_supplier_city').val(details.food_supplier_city)
+            $('#food_supplier_address').val(details.food_supplier_address)
+            $('#food_supplier_details').val(details.food_supplier_details)
+
+
+            if (details.food_supplier_service == 'Free') {
+                $('#food_supplier_service_free').prop('checked', true)
+            }
+            else if (details.food_supplier_service == 'Paid') {
+                $('#food_supplier_service_paid').prop('checked', true)
+            }
+            else {
+                $('#food_supplier_service_dn').prop('checked', true)
+            }
+
+            if (details.food_supplier_verify == 'Verified') {
+                $('#food_supplier_verify_verified').prop('checked', true)
+            }
+            else {
+                $('#food_supplier_verify_unverified').prop('checked', true)
+            }
+
+            if (details.volunteer_verify == 'Verified') {
+                $('#food_supplier_vol_verify').prop('checked', true)
+            }
+            else {
+                $('#food_supplier_vol_unverify').prop('checked', true)
+            }
+        })
+    }
+
+</script>
+</body>
+
+</html>
+

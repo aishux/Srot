@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oxygen Availablity</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/media/css/volunteer.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/media/js/volunteer.js"></script>
+
+
+</head>
+
+<body>
+
+    
+
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Oxygen <b>Availablity</b></h2>
+                </div>
+                <div class="col-sm-6">
+                    <div class="btn-group" data-toggle="buttons">
+
+                        <label class="btn btn-info active">
+                            <input type="radio" name="status" value="all" checked="checked"> All
+                        </label>
+                        <label class="btn btn-success">
+                            <input type="radio" name="status" value="active"> Verified
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="status" value="expired"> Unverified
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Verification</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for oxy in oxys %}
+                {% if  oxy.volunteer_verify == "Verified" %}
+                <tr data-status="active">
+                    <td style="color: #FFAE42;">Oxygen</td>
+                    <td>{{ oxy.oxygen_lead_name  }}</td>
+                    <td>{{ oxy.oxygen_lead_email }}</td>
+                    <td>{{ oxy.oxygen_lead_contact }}</td>
+                    <td>{{ oxy.oxygen_lead_city }}</td>
+                    <td>{{ oxy.oxygen_lead_address }}</td>
+                    <td>{{ oxy.volunteer_verify }}</td>
+                    <td><a href="{% url 'verifyLead' resource='Oxygen' id=oxy.id %}" class="btn btn-sm manage">Verify</a></td>
+                    <td><a href="#" class="btn open-form" id="e{{oxy.id}}" onclick="editoxygen(this.id)"
+                            style="color:white;">Edit</a></td>
+                    <td><a href="{% url 'deleteLead' resource='Oxygen' id=oxy.id %}" class="btn btn-sm manage">Delete</a></td>
+
+                </tr>
+                {% else %}
+                <tr data-status="expired">
+                   <td style="color: #FFAE42;">Oxygen</td>
+                    <td>{{ oxy.oxygen_lead_name  }}</td>
+                    <td>{{ oxy.oxygen_lead_email }}</td>
+                    <td>{{ oxy.oxygen_lead_contact }}</td>
+                    <td>{{ oxy.oxygen_lead_city }}</td>
+                    <td>{{ oxy.oxygen_lead_address }}</td>
+                    <td>{{ oxy.volunteer_verify }}</td>
+                    <td><a href="{% url 'verifyLead' resource='Oxygen' id=oxy.id %}" class="btn btn-sm manage">Verify</a></td>
+                    <td><a href="#" class="btn open-form" id="e{{oxy.id}}" onclick="editoxygen(this.id)"
+                            style="color:white;">Edit</a></td>
+                    <td><a href="{% url 'deleteLead' resource='Oxygen' id=oxy.id %}" class="btn btn-sm manage">Delete</a></td>
+                {% endif %}
+                {% endfor %}
+
+                <div class="form-popup">
+                    <div class="container form-wrapper">
+                        <button class="btn close-form">Close</button>
+                        <form id="my-form" novalidate="novalidate" action="{% url 'editoxygen' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" id="form_id" hidden name="form_id">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <h1 class="form-title">Oxygen Lead Details</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="oxygen_lead_name"
+                                        name="oxygen_lead_name" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Email</label>
+                                    <input type="text" class="form-control" id="oxygen_lead_email"
+                                        name="oxygen_lead_email" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Contact</label>
+                                    <input type="text" class="form-control" id="oxygen_lead_contact"
+                                        name="oxygen_lead_contact" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">City</label>
+                                    <input type="text" class="form-control" id="oxygen_lead_city"
+                                        name="oxygen_lead_city" required="">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="email">Address</label>
+                                    <textarea type="text" class="form-control" id="oxygen_lead_address"
+                                        name="oxygen_lead_address" required=""></textarea>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="email">User Verification</label><br>
+                                    <input type="radio" id="oxygen_lead_verify" name="oxygen_lead_verify"
+                                        value="Verified">
+                                    <label for="Verified">Verified</label><br>
+                                    <input type="radio" id="oxygen_lead_unverify" name="oxygen_lead_verify"
+                                        value="Unverified">
+                                    <label for="Unverified">Unverified</label><br>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="verify">Volunteer Verification</label><br>
+                                    <input type="radio" id="oxygen_vol_verify" name="oxygen_vol_verify"
+                                        value="Verified">
+                                    <label for="oxygen_vol_verify">Verified</label><br>
+                                    <input type="radio" id="oxygen_vol_unverify" name="oxygen_vol_verify"
+                                        value="Unverified">
+                                    <label for="oxygen_vol_unverify">Unverified</label><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="something">Additional Details</label>
+                                    <textarea name="oxygen_lead_details" class="form-control"
+                                        id="oxygen_lead_details"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn send-form">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.getElementById("oxygen_lead_verify").disabled = true;
+    document.getElementById("oxygen_lead_unverify").disabled = true;
+
+    function editoxygen(id) {
+        console.log(id)
+        $.ajax({
+            type: 'GET',
+            url: {% url 'editoxygen' %},
+            data: {
+            'oxygen_id': id
+        },
+
+        })
+        .success(function (data) {
+            var details = data.details[0]
+            $('#form_id').val(details.id)
+            $('#oxygen_lead_name').val(details.oxygen_lead_name)
+            $('#oxygen_lead_email').val(details.oxygen_lead_email)
+            $('#oxygen_lead_contact').val(details.oxygen_lead_contact)
+            $('#oxygen_lead_city').val(details.oxygen_lead_city)
+            $('#oxygen_lead_address').val(details.oxygen_lead_address)
+            $('#oxygen_lead_details').val(details.oxygen_lead_details)
+
+            if (details.oxygen_lead_verify == 'Verified') {
+                $('#oxygen_lead_verify').prop('checked', true)
+            }
+            else {
+                $('#oxygen_lead_unverify').prop('checked', true)
+            }
+
+            if (details.volunteer_verify == 'Verified') {
+                $('#oxygen_vol_verify').prop('checked', true)
+            }
+            else {
+                $('#oxygen_vol_unverify').prop('checked', true)
+            }
+        })
+    }
+
+</script>
+</body>
+
+</html>
+

@@ -26,6 +26,7 @@ class DiscussionComment(models.Model):
     
     
 class Plasma(models.Model):
+    volunteer_verify = models.CharField(max_length=100, default="Unverified")
     plasma_donor_name = models.CharField(max_length=100)
     plasma_donor_email = models.CharField(max_length=100)
     plasma_donor_contact = models.CharField(max_length=100)
@@ -40,6 +41,7 @@ class Plasma(models.Model):
         return self.plasma_donor_name + " - "  + self.plasma_donor_city
 
 class Oxygen(models.Model):
+    volunteer_verify = models.CharField(max_length=100, default="Unverified")
     oxygen_lead_name = models.CharField(max_length=100)
     oxygen_lead_email = models.CharField(max_length=100)
     oxygen_lead_contact = models.CharField(max_length=100)
@@ -52,6 +54,7 @@ class Oxygen(models.Model):
         return self.oxygen_lead_name + " - "  + self.oxygen_lead_city
 
 class Injection(models.Model):
+    volunteer_verify = models.CharField(max_length=100, default="Unverified")
     injection_lead_name = models.CharField(max_length=100)
     injection_lead_email = models.CharField(max_length=100)
     injection_lead_contact = models.CharField(max_length=100)
@@ -65,6 +68,7 @@ class Injection(models.Model):
         return self.injection_lead_name + " - "  + self.injection_lead_city
 
 class Food(models.Model):
+    volunteer_verify = models.CharField(max_length=100, default="Unverified")
     food_supplier_name = models.CharField(max_length=100)
     food_supplier_email = models.CharField(max_length=100)
     food_supplier_contact = models.CharField(max_length=100)
@@ -78,6 +82,7 @@ class Food(models.Model):
         return self.food_supplier_name + " - "  + self.food_supplier_city
 
 class Beds(models.Model):
+    volunteer_verify = models.CharField(max_length=100, default="Unverified")
     hospital_name = models.CharField(max_length=100)
     hospital_contact = models.CharField(max_length=100)
     hospital_city = models.CharField(max_length=100)
