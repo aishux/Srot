@@ -32,4 +32,5 @@ urlpatterns = [
     path('editoxygen/',views.editoxygen,name="editoxygen"),
     path('editinjection/',views.editinjection,name="editinjection"),
     path('editplasma/',views.editplasma,name="editplasma"),
+    path('volForm/',views.volForm,name="volForm"),
 ]

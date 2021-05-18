@@ -93,3 +93,15 @@ class Beds(models.Model):
 
     def __str__(self):
         return self.hospital_name + " - "  + self.hospital_city
+
+class Volunteer(models.Model):
+    volunteer_name = models.CharField(max_length=100)
+    volunteer_email = models.CharField(max_length=100)
+    volunteer_age = models.CharField(max_length=100)
+    volunteer_phone = models.CharField(max_length=100)
+    volunteer_hours = models.CharField(max_length=100)
+    volunteer_aadhar = models.FileField(upload_to='vol_aadhar')
+    volunteer_why = models.CharField(max_length=5000)
+
+    def __str__(self):
+        return self.volunteer_name

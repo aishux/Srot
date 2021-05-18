@@ -250,6 +250,21 @@ def home(request):
 def landing(request):
     return render(request,'volunteer/landing.html')
 
+def volForm(request):
+    if request.method == "POST":
+        volunteer_name = request.POST.get("volunteer_name")
+        volunteer_email = request.POST.get("volunteer_email")
+        volunteer_age = request.POST.get("volunteer_age")
+        volunteer_phone = request.POST.get("volunteer_phone")
+        volunteer_hours = request.POST.get("volunteer_hours")
+        volunteer_aadhar = request.FILES["volunteer_aadhar"]
+        volunteer_why = request.POST.get("volunteer_why")
+
+        vols = Volunteer(volunteer_name=volunteer_name,volunteer_email=volunteer_email,volunteer_age=volunteer_age,volunteer_phone=volunteer_phone,volunteer_hours=volunteer_hours,volunteer_aadhar=volunteer_aadhar, volunteer_why=volunteer_why )
+        vols.save()
+
+    return render(request,'volForm.html')
+
 # ------------------------------------ Volunteer Data ----------------------------------------
 
 def volfood(request):
@@ -463,3 +478,4 @@ def editoxygen(request):
     oxygen_id = request.GET.get('oxygen_id')[1:]
     oxygen_details = Oxygen.objects.filter(id=oxygen_id).values()
     return JsonResponse({'details': list(oxygen_details)})
+
