@@ -231,3 +231,7 @@ function changePage(pageNo){
         window.location.replace(window.location.href + `?page=${pageNo}`)
     }
 }
+
+function LoginAlert(){
+    alert("Please Login to Contribute!")
+}

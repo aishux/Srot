@@ -1,26 +1,15 @@
-<!doctype html>
-<html lang="en">
+{% extends 'basic.html' %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.83.1">
-    <title>Home</title>
+{% block basic_title %} Home{% endblock basic_title %}
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/heroes/">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
-        integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+{% block basic_head %}
+
     <link rel="stylesheet" href="/media/css/home.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.3up.dk/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.3up.dk/mdi@2.2.43/css/materialdesignicons.min.css">
-</head>
 
-<body>
+{% endblock basic_head %}
+
+{% block basic_body %}
 
     <main>
         <!-- Main Container -->
@@ -61,23 +50,23 @@
                         </tr>
                         <tr>
                             <td><a href="#transmission">How coronavirus is spread</a></td>
-                            <td><i class="fas fa-arrow-right"></i></td>
+                            <td><i class="fa fa-arrow-right"></i></td>
                         </tr>
                         <tr>
                             <td><a href="#symptoms">Symptoms of coronavirus</a></td>
-                            <td><i class="fas fa-arrow-right"></i></td>
+                            <td><i class="fa fa-arrow-right"></i></td>
                         </tr>
                         <tr>
                             <td><a href="#prevention">How to protect yourself</a></td>
-                            <td><i class="fas fa-arrow-right"></i></td>
+                            <td><i class="fa fa-arrow-right"></i></td>
                         </tr>
                         <tr>
                             <td><a href="#treatment">Treatment for coronavirus</a></td>
-                            <td><i class="fas fa-arrow-right"></i></td>
+                            <td><i class="fa fa-arrow-right"></i></td>
                         </tr>
                         <tr>
                             <td><a href="#faqs">FAQ's</a></td>
-                            <td><i class="fas fa-arrow-right"></i></td>
+                            <td><i class="fa fa-arrow-right"></i></td>
                         </tr>
 
                     </table>
@@ -936,19 +925,5 @@
         </div>
 
     </main>
+{% endblock basic_body %}
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.3up.dk/jquery@3.3.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.3up.dk/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-
-
-</body>
-
-</html>

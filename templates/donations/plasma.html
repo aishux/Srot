@@ -23,8 +23,13 @@
       <input placeholder="Phone Number" type="tel" tabindex="3" name="plasma_donor_contact" required autofocus>
     </fieldset>
     <fieldset>
-      <label for="cars">Donor's City:  <label style="color:red;">*</label></label>
-      <input placeholder="City" type="tel" tabindex="3" name="plasma_donor_city" required autofocus>
+      <label for="sts">Donor's State: <label style="color:red;">*</label></label><br>
+      <select onchange="print_city('state', this.selectedIndex);" id="sts" name="plasma_donor_state" style="color: black;" required autofocus></select>
+    </fieldset>
+    <br>
+    <fieldset>
+      <label for="state">Donor's City: <label style="color:red;">*</label></label><br>
+      <select id="state" style="color: black;" name="plasma_donor_city" required autofocus></select>
     </fieldset>
     
     <div class="form-inline">
@@ -86,3 +91,8 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+	<script src="/media/js/state_city.js"></script>
+  <script>print_state("sts");</script>
+{% endblock script %}

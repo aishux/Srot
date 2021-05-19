@@ -22,8 +22,13 @@
       <input placeholder="Phone Number" type="tel" tabindex="3" name="food_supplier_contact" required autofocus>
     </fieldset>
     <fieldset>
-      <label for="cars">Supplier City: <label style="color:red;">*</label></label>
-      <input placeholder="City" type="tel" tabindex="3" name="food_supplier_city" required autofocus>
+      <label for="cars">Supplier State: <label style="color:red;">*</label></label><br>
+      <select onchange="print_city('state', this.selectedIndex);" id="sts" name="food_supplier_state" style="color: black;" required autofocus></select>
+    </fieldset>
+    <br>
+    <fieldset>
+      <label for="cars">Supplier City: <label style="color:red;">*</label></label><br>
+      <select id="state" style="color: black;" name="food_supplier_city" required autofocus></select>
     </fieldset>
      <fieldset>
       <label for="cars">Supplier Address <label style="color:red;">*</label></label>
@@ -65,3 +70,8 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+	<script src="/media/js/state_city.js"></script>
+  <script>print_state("sts");</script>
+{% endblock script %}

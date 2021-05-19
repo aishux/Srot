@@ -96,7 +96,7 @@ body {
 
 .card-text {
   display: grid;
-  grid-template-columns: 0.7fr 2fr !important;
+  grid-template-columns: 0.5fr 2fr !important;
 }
 
 .title-total {

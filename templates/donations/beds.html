@@ -18,8 +18,13 @@
       <input placeholder="Phone Number" type="tel" tabindex="3" name="hospital_contact" required autofocus>
     </fieldset>
     <fieldset>
-      <label for="cars">Hospital City: <label style="color:red;">*</label></label>
-      <input placeholder="City" type="tel" tabindex="3" name="hospital_city" required autofocus>
+      <label for="sts">Hospital State: <label style="color:red;">*</label></label><br>
+      <select onchange="print_city('state', this.selectedIndex);" id="sts" name="hospital_state" style="color: black;" required autofocus></select>
+    </fieldset>
+    <br>
+    <fieldset>
+      <label for="state">Hospital City: <label style="color:red;">*</label></label><br>
+      <select id="state" style="color: black;" name="hospital_city" required autofocus></select>
     </fieldset>
 
     <fieldset>
@@ -63,3 +68,8 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+	<script src="/media/js/state_city.js"></script>
+  <script>print_state("sts");</script>
+{% endblock script %}

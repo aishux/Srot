@@ -164,3 +164,11 @@ ul {
   font-weight: 500;
 }
 
+.form-control {
+  margin-bottom: 10px !important;
+}
+
+.action-form .btn-block{
+  width: 100%;
+  margin-top: 10px;
+}

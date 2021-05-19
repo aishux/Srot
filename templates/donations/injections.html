@@ -22,8 +22,13 @@
       <input placeholder="Phone Number" type="tel" tabindex="3" name="injection_lead_contact" required autofocus>
     </fieldset>
     <fieldset>
-      <label for="cars">Distributor City: <label style="color:red;">*</label></label>
-      <input placeholder="City" type="tel" tabindex="3" name="injection_lead_city" required autofocus>
+      <label for="sts">Distributor State: <label style="color:red;">*</label></label><br>
+      <select onchange="print_city('state', this.selectedIndex);" id="sts" name="injection_lead_state" style="color: black;" required autofocus></select>
+    </fieldset>
+    <br>
+    <fieldset>
+      <label for="state">Distributor City: <label style="color:red;">*</label></label><br>
+      <select id="state" style="color: black;" name="injection_lead_city" required autofocus></select>
     </fieldset>
     <fieldset>
       <label for="cars">Distributor Address <label style="color:red;">*</label></label>
@@ -66,3 +71,8 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+	<script src="/media/js/state_city.js"></script>
+  <script>print_state("sts");</script>
+{% endblock script %}

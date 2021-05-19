@@ -31,9 +31,13 @@
                     </div>
                 
                     <div class="actions">
-                        <button><i class="far fa-clone"></i></button>
-                        <button><i class="fab fa-whatsapp"></i></button>
-                        <button><i class="far fa-envelope"></i></button>
+                        <input type="text" value='DETAILS FROM SROT - *Name*: {{ plasma.plasma_donor_name }}, *Blood Group*:  {{ plasma.plasma_donor_bloodgroup}}, *Gender*: {{ plasma.plasma_donor_gender}}, *Age*: {{ plasma.plasma_donor_age }}, *contact*:{{ plasma.plasma_donor_contact }}, *city*:{{ plasma.plasma_donor_city }}' id="copyToClipboardContent{{plasma.id}}" style="display: none;">
+
+                        <button onclick="copyToClipboard({{plasma.id}})"><i class="far fa-clone"></i></button>
+
+                        <button id="whatsapp_button" onclick="sendWhatsapp('DETAILS FROM SROT - %0a*Name*: {{ plasma.plasma_donor_name }} %0a*Blood Group*:  {{ plasma.plasma_donor_bloodgroup}} %0a*Gender*: {{ plasma.plasma_donor_gender}} %0a*Age*: {{ plasma.plasma_donor_age }} %0a*contact*:{{ plasma.plasma_donor_contact }} %0a*city*:{{ plasma.plasma_donor_city }}')"><i class="fab fa-whatsapp"></i></button>
+
+                        <button onclick="window.open('https://twitter.com/share?text=DETAILS FROM SROT - %0a*Name*: {{ plasma.plasma_donor_name }} %0a*Blood Group*:  {{ plasma.plasma_donor_bloodgroup}} %0a*Gender*: {{ plasma.plasma_donor_gender}}  %0a*Age*: {{ plasma.plasma_donor_age }} %0a*contact*:{{ plasma.plasma_donor_contact }} %0a*city*:{{ plasma.plasma_donor_city }}')"><i class="fab fa-twitter"></i></button>
                     </div>
                 </div>
             </div>
@@ -43,4 +47,7 @@
 {% endblock body %}
 
 {% block scripts %}
+<script>
+    document.getElementById("plasma_filter").selected = true;
+</script>
 {% endblock scripts %}
