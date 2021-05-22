@@ -7,7 +7,7 @@ body {
 	font-size: 13px;
 }
 .navbar {
-	background: #fff;
+	background: #393e46 !important;
 	padding-left: 16px;
 	padding-right: 16px;
 	border-bottom: 1px solid #dfe3e8;
@@ -98,12 +98,12 @@ body {
 }
 .navbar .btn-primary, .navbar .btn-primary:active {
 	color: #fff;
-	background: #33cabb !important;
+	background: #47E0B0 !important;
 	border: none;
 }	
 .navbar .btn-primary:hover, .navbar .btn-primary:focus {		
 	color: #fff;
-	background: #31bfb1 !important;
+	background: rgb(59, 206, 160) !important;
 }
 .navbar .social-btn .btn, .navbar .social-btn .btn:hover {
 	color: #fff;
@@ -188,4 +188,23 @@ body {
 	.navbar .input-group {
 		width: 100%;
 	}
+}
+
+#google_translate_element > div > span{
+	display: none;
+}
+
+.goog-te-gadget {
+	font-size: 0px !important;
+}
+.goog-te-combo{
+	font-family: sans-serif;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+	color: #47E0B0;
 }

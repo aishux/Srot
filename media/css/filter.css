@@ -10,6 +10,8 @@
      height: auto;
      background-size: 100%;
      background-repeat: no-repeat;
+     background-position-y: center;
+     background-position: top;
 }
 
 .banner_taital {
@@ -91,7 +93,6 @@
      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 17%, white 83%, rgba(255, 255, 255, 0) 100%);
      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00ffffff", endColorstr="#00ffffff", GradientType=1);
      height: 50px;
-     left: 50%;
      position: inherit;
      text-align: center;
      top: 10%;
@@ -204,4 +205,21 @@
 
 .pagination .prev, .pagination .next {
      font-size: 14px;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+	color: #47E0B0;
+}
+.navbar .btn-primary, .navbar .btn-primary:active {
+	color: #fff;
+	background: #47E0B0 !important;
+	border: none;
+}	
+.navbar .btn-primary:hover, .navbar .btn-primary:focus {		
+	color: #fff;
+	background: rgb(59, 206, 160) !important;
+}
+
+.title-total i{
+     color: #47E0B0;
 }

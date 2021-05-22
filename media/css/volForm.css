@@ -29,7 +29,7 @@ ul {
 }
 .sec-title h2 {
   position: relative;
-  color: #252525;
+  color: #00adb5;
   font-size: 36px;
   font-weight: 700;
   line-height: 1.5em;
@@ -134,9 +134,9 @@ ul {
   margin-top: 10px;
   text-transform: capitalize;
   padding: 16px 39px;
-  border: 2px solid #00b8ca;
+  border: 2px solid #47E0B0;
   font-family: Arimo, sans-serif;
-  background: #00b8ca;
+  background: #47E0B0;
   display: inline-block;
   position: relative;
   line-height: 24px;
@@ -171,4 +171,8 @@ ul {
 .action-form .btn-block{
   width: 100%;
   margin-top: 10px;
+}
+
+.title{
+  color: #47E0B0 !important;
 }

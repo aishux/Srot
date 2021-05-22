@@ -41,20 +41,23 @@
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="justify-self: normal;">
-		<a href="#" class="navbar-brand">Brand<b>Name</b></a>
-		<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+		<div class="d-flex flex-nowrap w-100">
+			<a href="/" class="navbar-brand"><img style="width: 40%;" src="/media/images/logo_medium.png" alt=""></a>
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
 		<!-- Collection of nav links, forms, and other content for toggling -->
 		<div id="navbarCollapse" class="collapse navbar-collapse justify-content-end">
 
-			<div class="navbar-nav ml-auto action-buttons">
+			<div class="navbar-nav ml-auto action-buttons" style="flex:none">
 				<a href="/" class="nav-item nav-link">Home</a>
 				<a href="/discussions/" class="nav-item nav-link">Discussion</a>
 				<a href="/donations/plasma/" class="nav-item nav-link">Donate</a>
 				{% if "Volunteer" in request.user.groups.all.0.name %}
 				<div class="nav-item dropdown">
-					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Check Leads <span><i class="fa fa-caret-down"></i></a>
+					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Check Leads <span><i
+								class="fa fa-caret-down"></i></a>
 					<div class="dropdown-menu">
 						<a href="{% url 'volfood' %}" class="dropdown-item">Food</a>
 						<a href="{% url 'volbeds' %}" class="dropdown-item">Beds</a>
@@ -88,25 +91,27 @@
 				</div>
 				{% else %}
 				<div class="nav-item dropdown login-dropdown">
-					<a href="#" data-toggle="dropdown"
-						class="btn btn-primary dropdown-toggle mr-4 sign-up-btn" id="login_button">Login</a>
+					<a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle mr-4 sign-up-btn"
+						id="login_button">Login</a>
 					<div class="dropdown-menu action-form" id="login_dropdown">
 						<form action="{% url 'login' %}" method="post">{% csrf_token %}
 							<div class="form-group social-btn clearfix">
 								<a class="btn btn-outline-dark" href="{% provider_login_url 'google' %}"
-                                    style="background-color: white;color:black;width:100%" role="button"
-                                    style="text-transform:none">
-                                    <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
-                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-                                    Login with Google
-                                </a>
+									style="background-color: white;color:black;width:100%" role="button"
+									style="text-transform:none">
+									<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+										src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+									Login with Google
+								</a>
 							</div>
 							<div class="or-seperator"><b>or</b></div>
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Username" required="required" name="login_username" id="login_username">
+								<input type="text" class="form-control" placeholder="Username" required="required"
+									name="login_username" id="login_username">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" placeholder="Password" required="required" name="login_password">
+								<input type="password" class="form-control" placeholder="Password" required="required"
+									name="login_password">
 							</div>
 							<input type="submit" class="btn btn-primary btn-block" value="Login">
 							<div class="text-center mt-2">
@@ -122,34 +127,37 @@
 						<form action="{% url 'signup' %}" id="signupForm" method="post">{% csrf_token %}
 							<div class="form-group social-btn clearfix">
 								<a class="btn btn-outline-dark" href="{% provider_login_url 'google' %}"
-                                    style="background-color: white;color:black;width:100%" role="button"
-                                    style="text-transform:none">
-                                    <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
-                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-                                    Login with Google
-                                </a>
+									style="background-color: white;color:black;width:100%" role="button"
+									style="text-transform:none">
+									<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+										src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+									Login with Google
+								</a>
 							</div>
 							<div class="or-seperator"><b>or</b></div>
 							<p class="hint-text">Fill in this form to create your account!</p>
 							<div class="form-group">
-								<input type="text" id="signup_username" class="form-control" placeholder="Username" required="required" name="username">
+								<input type="text" id="signup_username" class="form-control" placeholder="Username"
+									required="required" name="username">
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Email" required="required" name="email">
+								<input type="email" class="form-control" placeholder="Email" required="required"
+									name="email">
 							</div>
 							<div class="form-group">
-								<input type="password" id="signup_pass1" class="form-control" placeholder="Password" required="required" name="pass1">
+								<input type="password" id="signup_pass1" class="form-control" placeholder="Password"
+									required="required" name="pass1">
 							</div>
 							<div class="form-group">
-								<input type="password" id="signup_pass2" class="form-control" placeholder="Confirm Password"
-									required="required" name="pass2">
+								<input type="password" id="signup_pass2" class="form-control"
+									placeholder="Confirm Password" required="required" name="pass2">
 							</div>
 							<div class="alert alert-danger" id="password-mismatch" role="alert" hidden="true">
 								Passwords don't match!
-							  </div>
+							</div>
 							<div class="alert alert-danger" id="username-unavailable" role="alert" hidden="true">
 								Username not available!
-							  </div>
+							</div>
 							<input class="btn btn-primary btn-block" value="Sign up" onclick="formCheck()">
 						</form>
 					</div>
@@ -165,6 +173,14 @@
 	{% endfor %}
 	{% endif %}
 
+	<!-- Google translate -->
+	<div style="display: flex; flex-direction: row-reverse;margin-top:0px;background-color: #393e46;
+    color: #47E0B0;justify-self:normal">
+	
+	<div id="google_translate_element"></div>
+	<p style="padding-right: 20px;">Select the Language of your Choice:</p>
+	</div>
+
 	{% block basic_body %}
 	{% endblock basic_body %}
 
@@ -178,11 +194,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="banner_taital">Covid-19 Emergency Resources</h1>
-					<p class="browse_text">Do you have verified data and want to add to the database?
+					<h1 class="banner_taital" style="color:black;margin-top: -24px;">Covid-19 Emergency Resources</h1>
+					<p class="browse_text" style="color:black">Do you have verified data and want to add to the database?
 					</p>
 					<div class="banner_bt">
-						<a href="/donations/plasma/"><button class="read_bt">Contribute Now</button></a>
+						<a href="/donations/plasma/"><button class="read_bt" style="background-color:#47E0B0">Contribute Now</button></a>
 					</div>
 				</div>
 			</div>
@@ -218,7 +234,7 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<button class="search_bt" onclick="changeLead()">Search</button>
+						<button class="search_bt" style="background-color:#47E0B0" onclick="changeLead()">Search</button>
 					</div>
 				</div>
 
@@ -300,6 +316,15 @@
 	</div>
 	<div style="margin-top: 20px;"></div>
 
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+		}
+	</script>
+
+	<script type="text/javascript"
+		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 	<script src="/media/js/state_city.js"></script>
 	<script src="/media/js/leads.js"></script>
 	<script src="/media/js/basic.js"></script>
@@ -311,7 +336,7 @@
 		});
 		$('#alertmsg').fadeIn().delay(3000).fadeOut();
 
-		if({{items_length | safe}} == 0){
+		if ({{ items_length | safe }} == 0) {
 			document.getElementById("main_pagination_div").style.display = "none"
 			document.getElementById("no_results").style.display = "block"
 		}

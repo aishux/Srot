@@ -16,7 +16,7 @@ from email.message import EmailMessage
 import smtplib
 from .validators import validate_is_pdf
 from django.core.exceptions import ValidationError
-
+from itertools import chain
 # ------------------------------------ Pagination ----------------------------------------
 def pagination(resource,var_type,page_no):
     if page_no == 0:
@@ -49,7 +49,7 @@ def pagination(resource,var_type,page_no):
     # Display 10 discussion per page
     from_range,to_range = (page_no-1)*10, page_no*10
 
-    all_dis = resource.order_by('-id')[from_range:to_range]
+    all_dis = resource[from_range:to_range]
 
     params[var_type] = all_dis
 
@@ -106,7 +106,7 @@ def discussions(request):
     if "Verified" in hashtag_filters:
         query.add(Q(is_verified="yes"),Q.AND)
 
-    filtered_discussions = Discussion.objects.filter(query)
+    filtered_discussions = Discussion.objects.filter(query).order_by('-id')
 
     params = pagination(filtered_discussions,"all_dis",page_no)
     return render(request,'discussions.html',params)
@@ -249,36 +249,35 @@ def beds(request):
 # ------------------------------------ Lead Display ----------------------------------------
 
 def foodleads(request,pageno):
-    all_food = Food.objects.all()
-    foodFilter = FoodFilter()
+    all_food = list(chain(Food.objects.filter(volunteer_verify="Verified").order_by('-id'),Food.objects.filter(volunteer_verify="Unverified").order_by('-id')))
     context = pagination(all_food,"foods",pageno)
     if context == 0:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     return render(request,'leads/foodleads.html', context)
 
 def bedleads(request,pageno):
-    all_beds = Beds.objects.all()
+    all_beds = list(chain(Beds.objects.filter(volunteer_verify="Verified").order_by('-id'),Beds.objects.filter(volunteer_verify="Unverified").order_by('-id')))
     context = pagination(all_beds,"beds",pageno)
     if context == 0:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     return render(request,'leads/bedleads.html', context)
 
 def injectionleads(request,pageno):
-    all_inj = Injection.objects.all()
+    all_inj = list(chain(Injection.objects.filter(volunteer_verify="Verified").order_by('-id'),Injection.objects.filter(volunteer_verify="Unverified").order_by('-id')))
     context = pagination(all_inj,"injs",pageno)
     if context == 0:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     return render(request,'leads/injectionleads.html', context)
 
 def oxygenleads(request,pageno):
-    all_oxy = Oxygen.objects.all()
+    all_oxy = list(chain(Oxygen.objects.filter(volunteer_verify="Verified").order_by('-id'),Oxygen.objects.filter(volunteer_verify="Unverified").order_by('-id')))
     context = pagination(all_oxy,"oxys",pageno)
     if context == 0:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     return render(request,'leads/oxygenleads.html', context)
 
 def plasmaleads(request,pageno):
-    all_plasma = Plasma.objects.all()
+    all_plasma = list(chain(Plasma.objects.filter(volunteer_verify="Verified").order_by('-id'),Plasma.objects.filter(volunteer_verify="Unverified").order_by('-id')))
     context = pagination(all_plasma,"plasmas",pageno)
     if context == 0:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
@@ -300,6 +299,8 @@ def filterleads(request,resource,state="",pageno=1,city=""):
         else:
             all_oxy = Oxygen.objects.filter(oxygen_lead_state=state,oxygen_lead_city=city)
         
+        all_oxy =  list(chain(all_oxy.filter(volunteer_verify="Verified").order_by('-id'),all_oxy.filter(volunteer_verify="Unverified").order_by('-id')))
+
         context = pagination(all_oxy,"oxys",pageno)
         if context == 0:
             context = {}
@@ -313,6 +314,8 @@ def filterleads(request,resource,state="",pageno=1,city=""):
         else:
             all_plasma = Plasma.objects.filter(plasma_donor_state=state,plasma_donor_city=city)
 
+        all_plasma =  list(chain(all_plasma.filter(volunteer_verify="Verified").order_by('-id'),all_plasma.filter(volunteer_verify="Unverified").order_by('-id')))
+        
         context = pagination(all_plasma,"plasmas",pageno)
         if context == 0:
             context = {}
@@ -325,7 +328,9 @@ def filterleads(request,resource,state="",pageno=1,city=""):
             all_food = Food.objects.filter(food_supplier_state=state)
         else:
             all_food = Food.objects.filter(food_supplier_state=state,food_supplier_city=city)
-        
+
+        all_food =  list(chain(all_food.filter(volunteer_verify="Verified").order_by('-id'),all_food.filter(volunteer_verify="Unverified").order_by('-id')))
+
         context = pagination(all_food,"foods",pageno)
         if context == 0:
             context = {}
@@ -339,6 +344,8 @@ def filterleads(request,resource,state="",pageno=1,city=""):
         else:
             all_inj = Injection.objects.filter(injection_lead_state=state,injection_lead_city=city)
         
+        all_inj =  list(chain(all_inj.filter(volunteer_verify="Verified").order_by('-id'),all_inj.filter(volunteer_verify="Unverified").order_by('-id')))
+
         context = pagination(all_inj,"injs",pageno)
         if context == 0:
             context = {}
@@ -352,6 +359,8 @@ def filterleads(request,resource,state="",pageno=1,city=""):
         else:
             all_beds = Beds.objects.filter(hospital_state=state,hospital_city=city)
         
+        all_beds = list(chain(all_beds.filter(volunteer_verify="Verified").order_by('-id'),all_beds.filter(volunteer_verify="Unverified").order_by('-id')))
+
         context = pagination(all_beds,"beds",pageno)
         if context == 0:
             context = {}
@@ -397,7 +406,7 @@ def volForm(request):
 
 def volfood(request):
     if request.user.groups.filter(name="Volunteer").exists():
-        all_food = Food.objects.all()
+        all_food = Food.objects.filter(volunteer_deleted = "No")
         context = {'foods':all_food}
     else:
         return redirect("home")
@@ -405,7 +414,7 @@ def volfood(request):
 
 def volbeds(request):
     if request.user.groups.filter(name="Volunteer").exists():
-        all_beds = Beds.objects.all()
+        all_beds = Beds.objects.filter(volunteer_deleted = "No")
         context = {'beds':all_beds}
     else:
         return redirect("home")
@@ -413,7 +422,7 @@ def volbeds(request):
 
 def volinjection(request):
     if request.user.groups.filter(name="Volunteer").exists():
-        all_injs = Injection.objects.all()
+        all_injs = Injection.objects.filter(volunteer_deleted = "No")
         context = {'injs':all_injs}
     else:
         return redirect("home")
@@ -421,7 +430,7 @@ def volinjection(request):
 
 def voloxygen(request):
     if request.user.groups.filter(name="Volunteer").exists():
-        all_oxys = Oxygen.objects.all()
+        all_oxys = Oxygen.objects.filter(volunteer_deleted = "No")
         context = {'oxys':all_oxys}
     else:
         return redirect("home")
@@ -429,7 +438,7 @@ def voloxygen(request):
 
 def volplasma(request):
     if request.user.groups.filter(name="Volunteer").exists():
-        all_plass = Plasma.objects.all()
+        all_plass = Plasma.objects.filter(volunteer_deleted = "No")
         context = {'plass':all_plass}
     else:
         return redirect("home")
@@ -450,7 +459,9 @@ def deleteLead(request,resource,id):
             deleted_item = Plasma.objects.filter(id=id)[0]
         else:
             deleted_item = Injection.objects.filter(id=id)[0]
-        deleted_item.delete()
+        # deleted_item.delete()
+        deleted_item.volunteer_deleted = "Yes"
+        deleted_item.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     else:
         return redirect("home")
@@ -650,18 +661,21 @@ def handleSignUp(request):
         username = request.POST.get("username")
         email = request.POST.get("email")
         password = request.POST.get("pass1")
-        try:
-            user = User.objects.create_user(username=username,email=email,password=password)
+        if User.objects.filter(email=email).exists():
+            messages.error(request,"Email already exists")
+        else:
+            try:
+                user = User.objects.create_user(username=username,email=email,password=password)
 
-            user.save()
+                user.save()
 
-            login(request,user,backend="django.contrib.auth.backends.ModelBackend")
+                login(request,user,backend="django.contrib.auth.backends.ModelBackend")
 
-            messages.success(request,"Successfully logged In")
+                messages.success(request,"Successfully logged In")
 
-        except Exception as e:
+            except Exception as e:
 
-            messages.error(request,e)
+                messages.error(request,e)
 
     else:
         username = request.GET.get("username")

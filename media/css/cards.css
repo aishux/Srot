@@ -6,8 +6,8 @@ body {
   display: grid;
   align-items: center;
   justify-items: center;
-  background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
-}
+  background-color: #47E0B0;
+  }
 
 .card {
   background: #fff;
@@ -96,7 +96,7 @@ body {
 
 .card-text {
   display: grid;
-  grid-template-columns: 0.5fr 2fr !important;
+  grid-template-columns: 1fr 2fr !important;
 }
 
 .title-total {

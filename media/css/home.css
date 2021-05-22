@@ -55,7 +55,7 @@ figure.snip1390 {
   color: #000000;
   text-align: center;
   font-size: 16px;
-  background-color: #066CC4;
+  background-color: #00adb5;
   padding: 30px;
   background-image: linear-gradient(-25deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
   -webkit-box-sizing: border-box;
@@ -216,7 +216,6 @@ figure.snip1390 .profile {
     border-radius: 0;
   }
   .tab-content .card-header {
-    padding: 15px 16px;
     border-radius: 0;
     background-color : #F6F9FE;
   }
@@ -306,4 +305,34 @@ figure.snip1390 .profile {
 .action-form .btn-block{
   width: 100%;
   margin-top: 10px;
+}
+
+#faq-tab-content h5 button{
+  text-decoration: none;
+  padding: 15px 16px;
+}
+
+.card-header{
+  padding: 0px;
+}
+
+#hero_text_div > div > a:nth-child(2) > button:hover{
+  background-color: #47E0B0;
+  color: white !important;
+}
+
+body p{
+  color: #393e46;
+}
+
+div.container.col-xxl-10.px-1.py-1  div:nth-child(4) > div > div > div > h4{
+  color: #00adb5;
+}
+
+main  div.container.marketing  div  div  h4{
+  color: #00adb5;
+}
+
+body > main > div.container.col-xxl-10.px-1.py-1 > div:nth-child(2) > div.col-sm-8.col-lg-6 > table > tbody > tr > td > a{
+  color: #00adb5;
 }

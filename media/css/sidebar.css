@@ -8,11 +8,41 @@ h1 { font-size: 28px; text-align: center; margin-top: 50px; margin-bottom: 30px;
 .menu-parent li { list-style: none;}
 .menu-parent ul ul { display: none;}
 .menu-parent li.active>ul { display: block;}
-.menu-parent > ul > li > a { position: relative; display: block; background: #003040; background: linear-gradient(#003040, #002535); padding: 0 30px; font-size: 16px; line-height: 4; color: #ffffff; text-decoration: none;}
+.menu-parent > ul > li > a { position: relative; display: block;background-color: #393e46;padding: 0 30px; font-size: 16px; line-height: 4; color: #ffffff; text-decoration: none;}
 .menu-parent > ul > li > a .fa { margin-right: 8px;}
-.menu-parent ul ul li a { color: #ffffff; text-decoration: none; font-size: 16px; line-height: 4; display: block; padding: 0 30px; position: relative;}
+.menu-parent ul ul li a { text-decoration: none; font-size: 16px; line-height: 4; display: block; padding: 0 30px; position: relative;}
 .menu-parent ul ul li a:hover { background: #003545;}
 .menu-parent ul ul ul { background: rgba(0,0,0,.1); padding: 0;}
 .menu-parent a:not(:only-child):after { position: absolute; right: 20px; content: "\f067"; top: -6px; font-size: 20px; font-family: FontAwesome;}
 .menu-parent .active>a:not(:only-child):after { content: "\f068"; top: -6px; font-size: 20px; font-family: FontAwesome;}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+	color: #47E0B0;
+}
+.navbar .btn-primary, .navbar .btn-primary:active {
+	color: #fff;
+	background: #47E0B0 !important;
+	border: none;
+}	
+.navbar .btn-primary:hover, .navbar .btn-primary:focus {		
+	color: #fff;
+	background: rgb(59, 206, 160) !important;
+}
+.menu li{
+	border: 1px solid black;
+}
 
+li a:hover{
+	color: #47E0B0 !important;
+}
+
+#contact h3{
+	color:#47E0B0 !important;
+}
+
+body > div.container > div > div.col-md-12 > h1{
+	color: #00adb5;
+}
+
+#contact-submit{
+	background-color: #47E0B0 !important;
+}
