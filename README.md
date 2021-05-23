@@ -1,6 +1,6 @@
 <img align="right" src="https://github.com/aishux/Srot/blob/master/media/images/logo_smallest.png"> 
 
-# SROT - FIGHT IT DON'T FRIGHT IT
+# SROT - COVID19 EMERGENCY RESOURCES DIRECTORY
 
 
 
@@ -12,8 +12,7 @@
 
 # Description 
 <img align="right" src="https://www.who.int/images/default-source/imported/world-health-day-2019-health-is-a-human-right.gif" width = "200" height = "200">
-The Corona Virus pandemic has taken a devastating toll on people in India. It is not just a physical one but also has bought in pain, isolation, and death. Srot is an aim to be India's largest Crowd-Sourced Emergency Services Directory and its main objective is to ease the process of finding resources for an Indian citizen in times of crisis.The Corona Virus pandemic has taken a devastating toll on people in India. It is not just a physical one but also has bought in pain, isolation, and death. Srot is an aim to be India's largest Crowd-Sourced Emergency Services Directory and its main objective is to ease the process of finding resources for an Indian citizen in times of crisis.
-
+The Corona Virus pandemic has taken a devastating toll on people in India. It is not just a physical one but also has bought in pain, isolation, and death. Srot is an aim to be India's largest Crowd-Sourced Emergency Services Directory and its main objective is to ease the process of finding resources for an Indian citizen in times of crisis. Srot has an exclusive section for verified as well as unverified leads and also a WhatsApp ChatBot who can fetch leads instantly. It is also an initiative to support local food vendors who can provide healthy food to Covid infected people. Srot has a special place for people who would love to volunteer and help verify leads. Last but not the least, Srot's Flask application is incorporated with a Vaccine Notifier Bot who sends email updates as soon as vaccine slots are available on Cowin for the requested Age Group and Pin Code. The best part about Srot is that it can be converted to any desired Indian Language. 
 
 ## 👩‍💻 Technology Stack
 #### **Tools**
