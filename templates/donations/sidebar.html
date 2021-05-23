@@ -5,9 +5,14 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Have a lead?</title>
+	<title>{% block title %}{% endblock title %}</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/media/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/media/images/favicon_io/site.webmanifest">
 
 	<link rel="stylesheet" href="/media/css/sidebar.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
@@ -37,8 +42,18 @@
 
 			<div class="navbar-nav ml-auto action-buttons" style="flex:none">
 				<a href="/" class="nav-item nav-link">Home</a>
-				<a href="/discussions/" class="nav-item nav-link">Discussion</a>
-				<a href="/donations/plasma/" class="nav-item nav-link">Donate</a>
+				<div class="nav-item dropdown">
+					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Leads <span><i
+								class="fa fa-caret-down"></i></a>
+					<div class="dropdown-menu">
+						<a href="/leads/foodleads/1" class="dropdown-item">Food</a>
+						<a href="/leads/bedleads/1" class="dropdown-item">Beds</a>
+						<a href="/leads/injectionleads/1" class="dropdown-item">Injections</a>
+						<a href="/leads/oxygenleads/1" class="dropdown-item">Oxygen</a>
+						<a href="/leads/plasmaleads/1" class="dropdown-item">Plasma</a>
+					</div>
+				</div>
+				<a href="/donations/plasma/" class="nav-item nav-link">Provide Leads</a>
 				{% if "Volunteer" in request.user.groups.all.0.name %}
 				<div class="nav-item dropdown">
 					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Check Leads <span><i
@@ -54,18 +69,8 @@
 				{% else %}
 				<a href="{% url 'volForm' %}" class="nav-item nav-link">Be A Volunteer</a>
 				{% endif %}
-				<div class="nav-item dropdown">
-					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Leads <span><i
-								class="fa fa-caret-down"></i></a>
-					<div class="dropdown-menu">
-						<a href="/leads/foodleads/1" class="dropdown-item">Food</a>
-						<a href="/leads/bedleads/1" class="dropdown-item">Beds</a>
-						<a href="/leads/injectionleads/1" class="dropdown-item">Injections</a>
-						<a href="/leads/oxygenleads/1" class="dropdown-item">Oxygen</a>
-						<a href="/leads/plasmaleads/1" class="dropdown-item">Plasma</a>
-					</div>
-				</div>
-				<br>
+
+				<a href="/discussions/" class="nav-item nav-link">Discussion</a>
 				{% if request.user.is_authenticated %}
 				<div class="nav-item dropdown">
 					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Welcome
@@ -158,15 +163,19 @@
 	{% endfor %}
 	{% endif %}
 
+	 <a href="javascript:void(0)" rel="tooltip" data-original-title="Message Me 'join difficulty-unknown' for instant leads" class="float" target="_blank" id="whatsapp_button" onclick="sendWhatsapp('join difficulty-unknown')">
+    <i class="fa fa-whatsapp my-float"></i>
+    </a>
+
 	<!-- Google translate -->
 	<div style="display: flex; flex-direction: row-reverse;margin-top:0px;background-color: #393e46;
     color: #47E0B0;">
-	
+
 	<div id="google_translate_element"></div>
 	<p style="padding-right: 20px;">Select the Language of your Choice:</p>
 	</div>
 
-	
+
 	{% block basic_body %}
 	{% endblock basic_body %}
 
@@ -180,7 +189,7 @@
 			<div class="col-md-4">
 				<div id="accordian" class="menu-parent style1">
 					<ul class="menu">
-						
+
 						<li class="menu-parent">
 
 							<a href="{% url 'plasma' %}"><i class="fa fa-plus"></i>Plasma Donation</a>
@@ -222,7 +231,6 @@
 
 	<script type="text/javascript"
 		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-	<script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

@@ -7,6 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>{% block basic_title %} {% endblock basic_title %}</title>
 
+	<link rel="apple-touch-icon" sizes="180x180" href="/media/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/media/images/favicon_io/site.webmanifest">
+
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
@@ -33,8 +38,18 @@
 
 			<div class="navbar-nav ml-auto action-buttons" style="flex:none">
 				<a href="/" class="nav-item nav-link">Home</a>
-				<a href="/discussions/" class="nav-item nav-link">Discussion</a>
-				<a href="/donations/plasma/" class="nav-item nav-link">Donate</a>
+				<div class="nav-item dropdown">
+					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Leads <span><i
+								class="fa fa-caret-down"></i></a>
+					<div class="dropdown-menu">
+						<a href="/leads/foodleads/1" class="dropdown-item">Food</a>
+						<a href="/leads/bedleads/1" class="dropdown-item">Beds</a>
+						<a href="/leads/injectionleads/1" class="dropdown-item">Injections</a>
+						<a href="/leads/oxygenleads/1" class="dropdown-item">Oxygen</a>
+						<a href="/leads/plasmaleads/1" class="dropdown-item">Plasma</a>
+					</div>
+				</div>
+				<a href="/donations/plasma/" class="nav-item nav-link">Provide Leads</a>
 				{% if "Volunteer" in request.user.groups.all.0.name %}
 				<div class="nav-item dropdown">
 					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Check Leads <span><i
@@ -50,18 +65,8 @@
 				{% else %}
 				<a href="{% url 'volForm' %}" class="nav-item nav-link">Be A Volunteer</a>
 				{% endif %}
-				<div class="nav-item dropdown">
-					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Leads <span><i
-								class="fa fa-caret-down"></i></a>
-					<div class="dropdown-menu">
-						<a href="/leads/foodleads/1" class="dropdown-item">Food</a>
-						<a href="/leads/bedleads/1" class="dropdown-item">Beds</a>
-						<a href="/leads/injectionleads/1" class="dropdown-item">Injections</a>
-						<a href="/leads/oxygenleads/1" class="dropdown-item">Oxygen</a>
-						<a href="/leads/plasmaleads/1" class="dropdown-item">Plasma</a>
-					</div>
-				</div>
-				<br>
+
+				<a href="/discussions/" class="nav-item nav-link">Discussion</a>
 				{% if request.user.is_authenticated %}
 				<div class="nav-item dropdown">
 					<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Welcome
@@ -157,11 +162,14 @@
 	<!-- Google translate -->
 	<div style="display: flex; flex-direction: row-reverse;margin-top:0px;background-color: #393e46;
     color: #47E0B0;">
-	
+
 	<div id="google_translate_element"></div>
 	<p style="padding-right: 20px;color: #47E0B0">Select the Language of your Choice:</p>
 	</div>
 
+    <a href="javascript:void(0)" rel="tooltip" data-original-title="Message Me 'join difficulty-unknown' for instant leads" class="float" target="_blank" id="whatsapp_button" onclick="sendWhatsapp('join difficulty-unknown')">
+    <i class="fa fa-whatsapp my-float"></i>
+    </a>
 	{% block basic_body %}
 	{% endblock basic_body %}
 

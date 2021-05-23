@@ -1,10 +1,10 @@
 {% extends 'leads/filter.html' %}
-{% block title %}Plasma leads{% endblock title %}
+{% block title %}Srot :: Plasma leads{% endblock title %}
 {% block css %}
 {% endblock css %}
 
 {% block body %}
-    
+
     <div>
         {% for plasma in plasmas %}
         <div class="card">
@@ -27,9 +27,9 @@
                     <div class="desc"><b>Blood Group :</b> {{ plasma.plasma_donor_bloodgroup}}
                     <br><b>Gender :</b> {{ plasma.plasma_donor_gender}}
                     <br>
-                    <b>Age:</b> {{ plasma.plasma_donor_age }} 
+                    <b>Age:</b> {{ plasma.plasma_donor_age }}
                     </div>
-                
+
                     <div class="actions">
                         <input type="text" value='DETAILS FROM SROT - *Name*: {{ plasma.plasma_donor_name }}, *Blood Group*:  {{ plasma.plasma_donor_bloodgroup}}, *Gender*: {{ plasma.plasma_donor_gender}}, *Age*: {{ plasma.plasma_donor_age }}, *contact*:{{ plasma.plasma_donor_contact }}, *city*:{{ plasma.plasma_donor_city }}' id="copyToClipboardContent{{plasma.id}}" style="display: none;">
 

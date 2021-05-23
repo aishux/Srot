@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w%m70l%%b$4a2ka-agv1u%%b#e6^(+yn!7r+cs+qlx4z(6s)(g'
+SECRET_KEY = 'w%m70l%%b$4a2ka-agv1u5555e6^(+yn!7r+cs+qlx4z(6s)(g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -145,3 +145,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
+
+TWILIO_ACCOUNT_SID = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+TWILIO_AUTH_TOKEN = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+
+EMAIL_ADDRESS = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
+EMAIL_PASSWORD = 'XXXXXXXXXXXXXXXXXXXXXXXXX'

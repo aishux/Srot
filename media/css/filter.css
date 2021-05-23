@@ -214,12 +214,17 @@
 	color: #fff;
 	background: #47E0B0 !important;
 	border: none;
-}	
-.navbar .btn-primary:hover, .navbar .btn-primary:focus {		
+}
+.navbar .btn-primary:hover, .navbar .btn-primary:focus {
 	color: #fff;
 	background: rgb(59, 206, 160) !important;
 }
 
 .title-total i{
      color: #47E0B0;
+}
+
+.fa-whatsapp{
+    font-family: 'Font Awesome 5 Brands';
+}
 }

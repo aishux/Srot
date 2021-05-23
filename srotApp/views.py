@@ -17,6 +17,15 @@ import smtplib
 from .validators import validate_is_pdf
 from django.core.exceptions import ValidationError
 from itertools import chain
+from srot.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,EMAIL_ADDRESS,EMAIL_PASSWORD
+import os
+from twilio.http.http_client import TwilioHttpClient
+from django.views.decorators.csrf import csrf_exempt
+from twilio.rest import Client
+from .states_cities import get_states,get_cities,get_city_name,find_lead,get_cities_firstname
+import re
+
+
 # ------------------------------------ Pagination ----------------------------------------
 def pagination(resource,var_type,page_no):
     if page_no == 0:
@@ -26,14 +35,14 @@ def pagination(resource,var_type,page_no):
     total_pages = discussion_count // 10
     if discussion_count % 10 != 0:
         total_pages += 1
-    
+
 
     if page_no == 1:
         params["prev"] = ""
         params["actual_page"] = page_no
         params["next"] = min(page_no+1,total_pages)
         params["last_page"] = total_pages
-    
+
     elif page_no == total_pages:
         params["prev"] = max(page_no-1,1)
         params["actual_page"] = page_no
@@ -61,10 +70,10 @@ def pagination(resource,var_type,page_no):
 
 def discussions(request):
     if request.method == "POST":
-        
+
         if not request.user.is_authenticated:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
-        
+
         title = request.POST.get("title")
         dis_type= request.POST.get("distype")
         information = request.POST.get("main_info")
@@ -87,19 +96,19 @@ def discussions(request):
 
     if "Food" in hashtag_filters:
         query.add(Q(hashtags__icontains="Food"),Q.OR)
-    
+
     if "Plasma" in hashtag_filters:
         query.add(Q(hashtags__icontains="Plasma"),Q.OR)
-    
+
     if "Beds" in hashtag_filters:
         query.add(Q(hashtags__icontains="Beds"),Q.OR)
 
     if "Medicine" in hashtag_filters:
         query.add(Q(hashtags__icontains="Medicine"),Q.OR)
-    
+
     if "Needhelp" in hashtag_filters:
         query.add(Q(dis_type="Help Needed"),Q.AND)
-    
+
     elif "Helping" in hashtag_filters:
         query.add(Q(dis_type="Helping"),Q.AND)
 
@@ -138,7 +147,7 @@ def showComments(request):
     # If there are no comments
     if not all_comments:
         params["has_comments"] = "no"
-    
+
     # If there exists comments
     else:
         params["has_comments"] = "yes"
@@ -167,7 +176,7 @@ def plasma(request):
 
         plas = Plasma(plasma_donor_name=plasma_donor_name , plasma_donor_email= plasma_donor_email, plasma_donor_contact=plasma_donor_contact, plasma_donor_bloodgroup=plasma_donor_bloodgroup, plasma_donor_age=plasma_donor_age, plasma_donor_gender=plasma_donor_gender.capitalize(), plasma_donor_confirm=plasma_donor_confirm,plasma_donor_city=plasma_donor_city,plasma_donor_state=plasma_donor_state)
         plas.save()
-        
+
     all_plas = Plasma.objects.all()
 
     return render(request,'donations/plasma.html',{"all_plas":all_plas})
@@ -185,7 +194,7 @@ def oxygen(request):
 
         oxy = Oxygen(oxygen_lead_name=oxygen_lead_name, oxygen_lead_email=oxygen_lead_email, oxygen_lead_contact=oxygen_lead_contact, oxygen_lead_city=oxygen_lead_city, oxygen_lead_address=oxygen_lead_address, oxygen_lead_verify=oxygen_lead_verify, oxygen_lead_details=oxygen_lead_details,oxygen_lead_state=oxygen_lead_state)
         oxy.save()
-        
+
     all_oxy = Oxygen.objects.all()
 
     return render(request,'donations/oxygen.html',{"all_oxy":all_oxy})
@@ -204,7 +213,7 @@ def injections(request):
 
         inj = Injection(injection_lead_name=injection_lead_name, injection_lead_email=injection_lead_email, injection_lead_contact=injection_lead_contact, injection_lead_city=injection_lead_city, injection_lead_address=injection_lead_address, injection_lead_drugname=injection_lead_drugname, injection_lead_verify=injection_lead_verify, injection_lead_details=injection_lead_details,injection_lead_state=injection_lead_state)
         inj.save()
-        
+
     all_inj = Injection.objects.all()
 
     return render(request,'donations/injections.html',{"all_inj":all_inj})
@@ -223,7 +232,7 @@ def food(request):
 
         food = Food(food_supplier_name=food_supplier_name, food_supplier_email=food_supplier_email, food_supplier_contact=food_supplier_contact, food_supplier_city=food_supplier_city, food_supplier_address=food_supplier_address, food_supplier_service=food_supplier_service, food_supplier_verify=food_supplier_verify, food_supplier_details=food_supplier_details,food_supplier_state=food_supplier_state)
         food.save()
-        
+
     all_food = Food.objects.all()
 
     return render(request,'donations/food.html',{"all_food":all_food})
@@ -291,14 +300,14 @@ def filterleads(request,resource,state="",pageno=1,city=""):
 
     if city != "":
         city = city.strip()
-    
+
 
     if resource == "Oxygen":
         if city == "":
             all_oxy = Oxygen.objects.filter(oxygen_lead_state=state)
         else:
             all_oxy = Oxygen.objects.filter(oxygen_lead_state=state,oxygen_lead_city=city)
-        
+
         all_oxy =  list(chain(all_oxy.filter(volunteer_verify="Verified").order_by('-id'),all_oxy.filter(volunteer_verify="Unverified").order_by('-id')))
 
         context = pagination(all_oxy,"oxys",pageno)
@@ -307,7 +316,7 @@ def filterleads(request,resource,state="",pageno=1,city=""):
         context["state"] = state
         context["city"] = city
         return render(request,'leads/oxygenleads.html', context)
-            
+
     elif resource == "Plasma Donor":
         if city == "":
             all_plasma = Plasma.objects.filter(plasma_donor_state=state)
@@ -315,7 +324,7 @@ def filterleads(request,resource,state="",pageno=1,city=""):
             all_plasma = Plasma.objects.filter(plasma_donor_state=state,plasma_donor_city=city)
 
         all_plasma =  list(chain(all_plasma.filter(volunteer_verify="Verified").order_by('-id'),all_plasma.filter(volunteer_verify="Unverified").order_by('-id')))
-        
+
         context = pagination(all_plasma,"plasmas",pageno)
         if context == 0:
             context = {}
@@ -343,7 +352,7 @@ def filterleads(request,resource,state="",pageno=1,city=""):
             all_inj = Injection.objects.filter(injection_lead_state=state)
         else:
             all_inj = Injection.objects.filter(injection_lead_state=state,injection_lead_city=city)
-        
+
         all_inj =  list(chain(all_inj.filter(volunteer_verify="Verified").order_by('-id'),all_inj.filter(volunteer_verify="Unverified").order_by('-id')))
 
         context = pagination(all_inj,"injs",pageno)
@@ -358,7 +367,7 @@ def filterleads(request,resource,state="",pageno=1,city=""):
             all_beds = Beds.objects.filter(hospital_state=state)
         else:
             all_beds = Beds.objects.filter(hospital_state=state,hospital_city=city)
-        
+
         all_beds = list(chain(all_beds.filter(volunteer_verify="Verified").order_by('-id'),all_beds.filter(volunteer_verify="Unverified").order_by('-id')))
 
         context = pagination(all_beds,"beds",pageno)
@@ -367,7 +376,7 @@ def filterleads(request,resource,state="",pageno=1,city=""):
         context["state"] = state
         context["city"] = city
         return render(request,'leads/bedleads.html', context)
-    
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 # ------------------------------------ Home & Landing Page ----------------------------------------
@@ -392,7 +401,7 @@ def volForm(request):
             except ValidationError:
                 messages.error(request,"Only pdf files are allowed!")
                 return render(request,'volForm.html')
-                
+
             volunteer_why = request.POST.get("volunteer_why")
 
             vols = Volunteer(user=request.user,volunteer_name=volunteer_name,volunteer_email=volunteer_email,volunteer_age=volunteer_age,volunteer_phone=volunteer_phone,volunteer_hours=volunteer_hours,volunteer_aadhar=volunteer_aadhar, volunteer_why=volunteer_why )
@@ -585,7 +594,7 @@ def editplasma(request):
         return JsonResponse({'details': list(plasma_details)})
     else:
         return redirect("home")
-  
+
 
 # ------------------------------------ Volunteer Medicine Edit----------------------------------------
 
@@ -701,7 +710,7 @@ def handleLogin(request):
 
         else:
             messages.error(request,'Invalid credentials, Please try again')
-        
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 
@@ -722,19 +731,16 @@ def password_reset_request(request):
                     email_template_name = "password/password_reset_email.txt"
                     c = {
                     "email":user.email,
-                    'domain':'127.0.0.1:8000',
+                    'domain':'srot.pythonanywhere.com',
                     'site_name': 'Website',
                     "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                     "user": user,
                     'token': default_token_generator.make_token(user),
-                    'protocol': 'http',
+                    'protocol': 'https',
                     "username": user.username
                     }
                     email = render_to_string(email_template_name, c)
                     try:
-                        EMAIL_ADDRESS = 'srot.tech@gmail.com'
-                        ############## ADD PASSWORD WHEN HOSTED ######################
-                        EMAIL_PASSWORD = 'qxlhlpksflyowqzk'
 
                         with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
                             smtp.ehlo()
@@ -751,6 +757,84 @@ def password_reset_request(request):
                     except BadHeaderError:
                         return HttpResponse('Invalid header found.')
                     return redirect ("/password_reset/done/")
-                    
+
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})
+
+
+# ------------------------------------ WhatsApp Bot ----------------------------------------
+
+users_dict = {}
+
+# every user entity is "phone numer":[state,city,resource,[list of sent lead ids]]
+
+@csrf_exempt
+def bot(request):
+    proxy_client = TwilioHttpClient(proxy={'http': os.environ['http_proxy'], 'https': os.environ['https_proxy']})
+    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, http_client=proxy_client)
+    body = "Not a valid reply"
+    if request.method == "POST":
+        received_msg = request.POST.get('Body',"")
+        user_whatsapp_number = request.POST.get('From',"")
+
+        if "start" in received_msg:
+            body = "Select the id of state which you want to search lead in:"
+            for index,i in enumerate(get_states()):
+                body += f"\nS{index+1}.{i}"
+            users_dict[str(user_whatsapp_number)] = [None,None,None,[]]
+
+        elif re.search("^S[1-9][1-9]*",received_msg):
+            if str(user_whatsapp_number) not in users_dict:
+                body = "Please type 'start' to get going"
+            else:
+                state_id = re.findall("^S[1-9][1-9]*",received_msg)[0]
+                state_name,cities = get_cities(state_id)
+                users_dict[str(user_whatsapp_number)][0] = state_name
+
+                body = "Select the id of city which you want to search lead in:"
+
+                if len(cities) > 25:
+                    body = "Please provide the first letter of your city name"
+                    users_dict[str(user_whatsapp_number)][2] = True
+                else:
+                    body = "Select the id of city which you want to search lead in:"
+                    for index,i in enumerate(cities):
+                        body += f"\nC{index+1}.{i}"
+
+        elif re.search("^C[1-9][1-9]*",received_msg):
+            if users_dict[str(user_whatsapp_number)][0] != None:
+                city_id = re.findall("^C[1-9][1-9]*",received_msg)[0]
+                city_name = get_city_name(users_dict[str(user_whatsapp_number)][0],city_id)
+                users_dict[str(user_whatsapp_number)][1] = city_name
+                body = "Select the resource for which you want the lead: \nR1:Food \nR2:Beds \nR3:Injection \nR4:Oxygen \nR5:Plasma"
+            else:
+                body = "Please 'start' by selecting the state first"
+
+        elif re.search("^R[1-6]",received_msg):
+            if users_dict[str(user_whatsapp_number)][1] != None:
+                resource_id = re.findall("^R[1-6]",received_msg)[0]
+                required_lead, sent_lead_ids = find_lead(sent_lead_ids=users_dict[str(user_whatsapp_number)][3],resource_id=resource_id,city=users_dict[str(user_whatsapp_number)][1])
+
+                if required_lead != "Sorry there are no Leads! But don't loose hope try finding in nearby cities!":
+
+                    body = "Lead that we could find is:\n{} \n\nIf you're not satisfied with this lead please provide the resource id again for a new lead".format(required_lead)
+                else:
+                    body = required_lead
+            else:
+                body = "Please provide the city first!"
+
+        else:
+            if users_dict[str(user_whatsapp_number)][0] != None:
+                if users_dict[str(user_whatsapp_number)][2] != None:
+                    cities = get_cities_firstname(users_dict[str(user_whatsapp_number)][0],first_letter=received_msg.lower()[0])
+
+                    body = f"Select the id of district which you want to search lead in:{cities}"
+            else:
+                body = "Please 'start' by selecting the state first"
+
+        message = client.messages.create(
+            from_='whatsapp:+14155238886',
+            body=body,
+            to='{}'.format(user_whatsapp_number)
+            )
+    return HttpResponse('Great! Expect a message...')

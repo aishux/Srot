@@ -1,10 +1,10 @@
 {% extends 'leads/filter.html' %}
-{% block title %}Oxygen Leads{% endblock title %}
+{% block title %}Srot :: Oxygen Leads{% endblock title %}
 {% block css %}
 {% endblock css %}
 
 {% block body %}
-    
+
     <div>
         {% for oxy in oxys %}
         <div class="card">
@@ -35,7 +35,7 @@
                         <button id="whatsapp_button" onclick="sendWhatsapp('DETAILS FROM SROT - %0a*Name*: {{ oxy.oxygen_lead_name }} %0a*Address*:  {{ oxy.oxygen_lead_address }} %0a *Available*: Cylinder/Concentrator %0a*contact*:{{ oxy.oxygen_lead_contact }} %0a*city*:{{ oxy.oxygen_lead_city }}')"><i class="fab fa-whatsapp"></i></button>
 
                         <button onclick="window.open('https://twitter.com/share?text=DETAILS FROM SROT - %0a*Name*: {{ oxy.oxygen_lead_name }} %0a*Address*:  {{ oxy.oxygen_lead_address }} %0a *Available*: Cylinder/Concentrator %0a*contact*:{{ oxy.oxygen_lead_contact }} %0a*city*:{{ oxy.oxygen_lead_city }}')"><i class="fab fa-twitter"></i></button>
-                        
+
                     </div>
                 </div>
             </div>

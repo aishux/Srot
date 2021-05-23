@@ -23,12 +23,12 @@ class DiscussionComment(models.Model):
     user = models.CharField(max_length=1000)
     comment = models.TextField()
     timestamp = models.DateTimeField(default=tz.now)
-    
-    
+
+
 class Plasma(models.Model):
     volunteer_verify = models.CharField(max_length=100, default="Unverified")
     plasma_donor_name = models.CharField(max_length=100)
-    plasma_donor_email = models.CharField(max_length=100)
+    plasma_donor_email = models.CharField(max_length=100,null=True,blank=True)
     plasma_donor_contact = models.CharField(max_length=100)
     plasma_donor_state= models.CharField(max_length=100)
     plasma_donor_city= models.CharField(max_length=100)
@@ -37,7 +37,7 @@ class Plasma(models.Model):
     plasma_donor_gender = models.CharField(max_length=100)
     plasma_donor_confirm = models.CharField(max_length=100)
     volunteer_deleted = models.CharField(choices=(("Yes","Yes"),("No","No")),max_length=5,default="No")
-    
+
 
     def __str__(self):
         return self.plasma_donor_name + " - "  + self.plasma_donor_city
@@ -45,7 +45,7 @@ class Plasma(models.Model):
 class Oxygen(models.Model):
     volunteer_verify = models.CharField(max_length=100, default="Unverified")
     oxygen_lead_name = models.CharField(max_length=100)
-    oxygen_lead_email = models.CharField(max_length=100)
+    oxygen_lead_email = models.CharField(max_length=100,null=True,blank=True)
     oxygen_lead_contact = models.CharField(max_length=100)
     oxygen_lead_state = models.CharField(max_length=100)
     oxygen_lead_city = models.CharField(max_length=100)
@@ -60,7 +60,7 @@ class Oxygen(models.Model):
 class Injection(models.Model):
     volunteer_verify = models.CharField(max_length=100, default="Unverified")
     injection_lead_name = models.CharField(max_length=100)
-    injection_lead_email = models.CharField(max_length=100)
+    injection_lead_email = models.CharField(max_length=100,null=True,blank=True)
     injection_lead_contact = models.CharField(max_length=100)
     injection_lead_state = models.CharField(max_length=100)
     injection_lead_city = models.CharField(max_length=100)
@@ -76,7 +76,7 @@ class Injection(models.Model):
 class Food(models.Model):
     volunteer_verify = models.CharField(max_length=100, default="Unverified")
     food_supplier_name = models.CharField(max_length=100)
-    food_supplier_email = models.CharField(max_length=100)
+    food_supplier_email = models.CharField(max_length=100,null=True,blank=True)
     food_supplier_contact = models.CharField(max_length=100)
     food_supplier_state = models.CharField(max_length=100)
     food_supplier_city = models.CharField(max_length=100)

@@ -1,5 +1,5 @@
 {% extends "donations/sidebar.html" %}
-
+{% block title %}Srot :: Oxygen Donation{% endblock title %}
 {% block css %}
 <link rel="stylesheet" href="/media/css/plasma.css">
 {% endblock css %}
@@ -14,8 +14,8 @@
       <input placeholder="Name" type="text" tabindex="1" name="oxygen_lead_name" required autofocus>
     </fieldset>
     <fieldset>
-      <label for="cars">Email or Organization Website : <label style="color:red;">*</label></label>
-      <input placeholder="Email/Website" type="email" tabindex="2" name="oxygen_lead_email" required autofocus>
+      <label for="cars">Email or Organization Website : </label>
+      <input placeholder="Email/Website" type="email" tabindex="2" name="oxygen_lead_email" autofocus>
     </fieldset>
     <fieldset>
       <label for="cars">Contact: <label style="color:red;">*</label></label>
@@ -34,7 +34,7 @@
       <label for="cars">Address <label style="color:red;">*</label></label>
       <textarea id="w3review" name="oxygen_lead_address" rows="2" cols="20" required autofocus></textarea>
     </fieldset>
-    
+
     <fieldset class="form-inline">
       <label for="cars">Is it verified by you? : <label style="color:red;">*</label></label><p></p>
       <input type="radio" id="yes" name="oxygen_lead_verify" value="Verified" required autofocus>
@@ -54,7 +54,7 @@
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
 
-    
+
 
   </form>
 

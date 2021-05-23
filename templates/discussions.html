@@ -1,16 +1,16 @@
 {% extends 'basic.html' %}
 {% load humanize %}
 
-{% block basic_title %} Discussion {% endblock basic_title %}
+{% block basic_title %} Srot :: Discussions {% endblock basic_title %}
 
 {% block basic_head %}
 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
     integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
 <link rel="stylesheet" href="/media/css/discussion.css">
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 {% endblock basic_head %}
 
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
                                 <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
                             </div>
@@ -140,7 +140,7 @@
                             NEW DISCUSSION
                         </button>
                         {% endif %}
-                    
+
                         <button class="btn btn-primary has-icon btn-block d-md-none" type="button" data-toggle="modal"
                             data-target="#filterModal"
                             style="padding: 0px;font-size: 14.4px;width:34%;margin-top: 0.2rem;background-color: #47E0B0;border-color:white">
@@ -585,7 +585,7 @@
 
                                 </div>
 
-                              
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
@@ -600,7 +600,7 @@
 {% endblock basic_body %}
 
 {% block basic_scripts %}
-    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
     <script src="https://use.typekit.net/tqi0rfb.js"></script>
     <script>
         if({{items_length | safe}} == 0){

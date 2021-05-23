@@ -1,5 +1,5 @@
 {% extends "donations/sidebar.html" %}
-
+{% block title %}Srot :: Plasma Donation{% endblock title %}
 {% block css %}
 <link rel="stylesheet" href="/media/css/plasma.css">
 {% endblock css %}
@@ -15,8 +15,8 @@
       <input placeholder="Name" type="text" tabindex="1" name="plasma_donor_name" required autofocus>
     </fieldset>
     <fieldset>
-      <label for="cars">Donor's Email :  <label style="color:red;">*</label></label>
-      <input placeholder="Email" type="email" tabindex="2" name="plasma_donor_email" required autofocus>
+      <label for="cars">Donor's Email :  </label>
+      <input placeholder="Email" type="email" tabindex="2" name="plasma_donor_email" autofocus>
     </fieldset>
     <fieldset>
       <label for="cars">Donor's Contact:  <label style="color:red;">*</label></label>
@@ -31,7 +31,7 @@
       <label for="state">Donor's City: <label style="color:red;">*</label></label><br>
       <select id="state" style="color: black;" name="plasma_donor_city" required autofocus></select>
     </fieldset>
-    
+
     <div class="form-inline">
     <fieldset class="form-inline">
       <label for="cars" class="form-inline">Donar's Blood Group  <label style="color:red;">*</label></label>
@@ -47,7 +47,7 @@
         <option value="O-">O-</option>
       </select>
     </fieldset>
-   
+
     <fieldset class="form-inline">
       <label for="quantity" class="form-inline">Age  <label style="color:red;">*</label></label>
       <input type="number" id="quantity" name="plasma_donor_age" min="18" max="60" required autofocus>

@@ -1,5 +1,5 @@
 {% extends "donations/sidebar.html" %}
-
+{% block title %}Srot :: Food Donation{% endblock title %}
 {% block css %}
 <link rel="stylesheet" href="/media/css/plasma.css">
 {% endblock css %}
@@ -14,8 +14,8 @@
       <input placeholder="Name" type="text" tabindex="1" name="food_supplier_name" required autofocus>
     </fieldset>
     <fieldset>
-      <label for="cars">Supplier Email or Website : <label style="color:red;">*</label></label>
-      <input placeholder="Email/Website" type="text" tabindex="2" name="food_supplier_email" required autofocus>
+      <label for="cars">Supplier Email or Website : </label>
+      <input placeholder="Email/Website" type="text" tabindex="2" name="food_supplier_email" autofocus>
     </fieldset>
     <fieldset>
       <label for="cars">Supplier Contact: <label style="color:red;">*</label></label>
@@ -44,7 +44,7 @@
       <input type="radio" id="dont know" name="food_supplier_service" value="Don't Know">
       <label for="Don't Know">Don't Know</label>
     </fieldset>
-    
+
     <fieldset class="form-inline">
       <label for="cars">Is it verified by you? : <label style="color:red;">*</label></label><p></p>
       <input type="radio" id="yes" name="food_supplier_verify" value="Verified">
