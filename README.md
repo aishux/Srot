@@ -1,87 +1,147 @@
-![logo](https://github.com/aishux/Srot/blob/master/media/images/logo_small.png)
+<img align="right" src="https://github.com/aishux/Srot/blob/master/media/images/logo_smallest.png"> 
+
+# SROT - FIGHT IT DON'T FRIGHT IT
+
 
 
 ![Issues](https://img.shields.io/github/issues/aishux/Srot.git)
 ![Forks](https://img.shields.io/github/forks/aishux/Srot.git)
 ![Stars](https://img.shields.io/github/stars/aishux/Srot.git)
 ![License](https://img.shields.io/github/license/aishux/Srot.git)
+![](https://warehouse-camo.ingress.cmh1.psfhosted.org/582ab2eba9d0e0f4acbea2fd883f604349908147/68747470733a2f2f696d672e736869656c64732e696f2f707970692f707976657273696f6e732f74656e736f72666c6f772e7376673f7374796c653d706c6173746963)
 
+# Description 
+<img align="right" src="https://www.who.int/images/default-source/imported/world-health-day-2019-health-is-a-human-right.gif" width = "200" height = "200">
+The Corona Virus pandemic has taken a devastating toll on people in India. It is not just a physical one but also has bought in pain, isolation, and death. Srot is an aim to be India's largest Crowd-Sourced Emergency Services Directory and its main objective is to ease the process of finding resources for an Indian citizen in times of crisis.The Corona Virus pandemic has taken a devastating toll on people in India. It is not just a physical one but also has bought in pain, isolation, and death. Srot is an aim to be India's largest Crowd-Sourced Emergency Services Directory and its main objective is to ease the process of finding resources for an Indian citizen in times of crisis.
 
-# Theme approach ![](https://warehouse-camo.ingress.cmh1.psfhosted.org/582ab2eba9d0e0f4acbea2fd883f604349908147/68747470733a2f2f696d672e736869656c64732e696f2f707970692f707976657273696f6e732f74656e736f72666c6f772e7376673f7374796c653d706c6173746963)
-<img align="right" src="https://media.giphy.com/media/l0HlESqXkgB97Xs7C/giphy.gif" width = "200" height = "250">
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-# Document
 
 ## 👩‍💻 Technology Stack
 #### **Tools**
 
-- Jupyter Notebook/ Google Colab / PySpark
+- **Front End** : HTML / CSS / JavaScript / jQuery / AJAX / Bootstrap 
 
-- **Front End** : HTML / CSS / JavaScript
+- **Back End** : Django / Flask / Python / SQlite3
 
-- **Back End** : MongoDB / Flask
+- **API's** : Twillio / CoWin 
 
-- **Python version** : 3.0 or Higher
+# Clone and Star the Repository
 
-- **Libraries**: sklearn numpy, scipy, matplotlib
+``` git clone https://github.com/aishux/Srot.git ```
 
-# To Setup 
-```
-1. Activate the virtual environment
-  	
-python -m venv env
-env\Scripts\activate
-```
+# :star: SROT Website Setup
 
-# Install git lfs : [referrences](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage#:~:text=Installing%20Git%20Large%20File%20Storage.%201%20Navigate%20to,Premium%20Support.%20Be%20sure%20to%20include%20...%20)
-to know more:https://youtu.be/9gaTargV5BY
+## To Setup 
 
-	git lfs install 
-	git lfs pull
+1. Go inside the Django directory
+``` 	
+cd srot_website
+``` 
+
+2. Now create and activate an environment
+
+	``` python -m venv django_env``` 
+
+	``` .\django_env\Scripts\activate```  (for Windows) or ``` source django_env/bin/activate```  (on Mac and Linux)
+
+3. Install dependency for python-magic as per your given OS
+
+	Debian/ Ubuntu
+	```sudo apt-get install libmagic1```
+
+	Windows
+	```pip install python-magic-bin```
+
+	OSX
+	```brew install  libmagic```
+
+
+## Install requirements
 
 	pip install -r requirements.txt
-	python main.py
 
-# To run 
-	Activate 
-	source env/bin/activate
-	python main.py
+## To run 
 
-# Db Migrate
-```
-python manager.py db init
-python manager.py db migrate
-python manager.py db upgrade
-```
-# Website Demo
-<h3>USER SITE</h3> 
-<img src="https://user-images.githubusercontent.com/68437435/111871736-bc854780-89b1-11eb-9614-455e615025ae.gif" alt="Demo" width="80%" height="90%"/>
-<h3>VOLUNTEER SITE</h3>
-<img src="https://user-images.githubusercontent.com/68437435/111871719-a8414a80-89b1-11eb-87c0-0a3288a34add.gif" alt="Demo" width="80%" height="90%"/>
-</p>
+	python manage.py runserver 
+	
 
-<h3>Scan the below QR to visit the Website</h3>
-<img src="https://github.com/vikasdo/Book-Recommendation-Analysis/blob/main/bookstore/static/img/qrcode_booklystore.herokuapp.com.png" width="200px" height="200px"/>
-<a href="https://bookly-bookstore.herokuapp.com/login" style="text-decoration:none; color:white;">Bookly Store</a>
+# :star: Vaccine Notifier Setup
+
+## To Setup 
+
+1. Go inside the Flask directory
+``` 	
+cd vaccine_notifier
+``` 
+
+2. Now create and activate an environment
+
+	``` python -m venv flask_env``` 
+
+	``` .\flask_env\Scripts\activate```  (for Windows) or ``` source flask_env/bin/activate```  (on Mac and Linux)
+
+## Install requirements
+
+	pip install -r requirements.txt
+
+## To run 
+
+	python app.py
+	
+	(Avoid running using flask run which doesn’t allow threads to work efficiently)
+
+# :star: Note
+
+- The WhatsApp bot is configured on the hosted website so changes in local server won't effect the working.
+- Change email address and app password to your credentials in the app.py file to send emails.
+- Change email and password in srot > settings.py to your credentials for forgot password emails.
+
+# :star: Video Explanation
+
+https://youtu.be/9gaTargV5BY
+
+# :star: Process Flow
+
+## SROT Website
+
+![Django Process Diagram ](https://user-images.githubusercontent.com/55614782/119251296-95224500-bbc3-11eb-82b8-53f010b7f661.jpg)
+
+## Vaccine Notifier
+
+![Vaccine notifier process](https://user-images.githubusercontent.com/55614782/119254491-37e2bf80-bbd4-11eb-907a-3b70474545d3.jpeg)
+
+<br>
+<br>
+
+# :star: DATA FLOW DIAGRAMS
+
+## SROT Website
+
+![User DFD](https://user-images.githubusercontent.com/55614782/119254609-e25ae280-bbd4-11eb-831e-aea80dc1f0e4.jpg)
+
+<br>
+
+![Volunteer DFD](https://user-images.githubusercontent.com/55614782/119254513-547ef780-bbd4-11eb-94a2-066c26bf305b.jpg)
+
+<br>
+
+## Vaccine Notifier
+
+![Flask DFD](https://user-images.githubusercontent.com/55614782/119258719-94e87080-bbe8-11eb-997a-5209bc5871a8.jpg)
+
+<br>
+
+# :star: Scan the below QR to visit the Website
+
+<!-- ![qrcode](https://user-images.githubusercontent.com/55614782/119258790-dc6efc80-bbe8-11eb-857c-3a2ca2c61852.png) -->
+<img src="https://user-images.githubusercontent.com/55614782/119258790-dc6efc80-bbe8-11eb-857c-3a2ca2c61852.png" width="150" height="150">
+
+<a href="https://srot.pythonanywhere.com/" style="text-decoration:none; color:white;">Visit Srot</a>
 
 ## The geeks🤓 behind this initiative:
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/vikasdo"><img src="https://avatars.githubusercontent.com/u/44545660?s=400&u=eeb8f17ce2c96e0e37b075b56218284a47589c40&v=4" width="100px;" alt=""/><br /><sub><b>Vikas</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/aishux"><img src="https://avatars.githubusercontent.com/u/61228436?v=4" width="200px;" alt=""/><br /><sub><b>Aishwarya Nathani</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/niksm7"><img src="https://avatars.githubusercontent.com/u/55614782?v=4" width="200px;" alt=""/><br /><sub><b>Nikhil Mankani</b></sub></a><br /></td>
   </tr>
 </table>
-
-## Srot is a part of these programs:
-
-<p align="center">
- <a>
- <img  width="70%" height="30%" src="https://eyic.e-yantra.org/img/eYantra_logo_whitetext.png">
-
- 
-</p>
-
-</br>
-
-
-
