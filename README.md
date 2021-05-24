@@ -1,4 +1,4 @@
-<img align="right" src="https://github.com/aishux/Srot/blob/master/media/images/logo_smallest.png"> 
+<img align="right" src="https://user-images.githubusercontent.com/55614782/119309831-7c319680-bc8c-11eb-9226-226de5f8f951.png"> 
 
 # SROT - COVID19 EMERGENCY RESOURCES DIRECTORY
 
