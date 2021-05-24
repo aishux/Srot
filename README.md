@@ -1,6 +1,6 @@
 <img align="right" src="https://github.com/aishux/Srot/blob/master/media/images/logo_smallest.png"> 
 
-# SROT - COVID19 EMERGENCY RESOURCES DIRECTORY
+## SROT - COVID19 EMERGENCY RESOURCES DIRECTORY
 
 
 
@@ -93,10 +93,6 @@ cd vaccine_notifier
 - The WhatsApp bot is configured on the hosted website so changes in local server won't effect the working.
 - Change email address and app password to your credentials in the app.py file to send emails.
 - Change email and password in srot > settings.py to your credentials for forgot password emails.
-
-# :star: Video Explanation
-
-https://youtu.be/9gaTargV5BY
 
 # :star: Process Flow
 
