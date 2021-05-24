@@ -1,6 +1,6 @@
 <img align="right" src="https://github.com/aishux/Srot/blob/master/media/images/logo_smallest.png"> 
 
-## SROT - COVID19 EMERGENCY RESOURCES DIRECTORY
+# SROT - COVID19 EMERGENCY RESOURCES DIRECTORY
 
 
 
@@ -128,7 +128,7 @@ cd vaccine_notifier
 # :star: Scan the below QR to visit the Website
 
 <!-- ![qrcode](https://user-images.githubusercontent.com/55614782/119258790-dc6efc80-bbe8-11eb-857c-3a2ca2c61852.png) -->
-<img src="https://user-images.githubusercontent.com/55614782/119258790-dc6efc80-bbe8-11eb-857c-3a2ca2c61852.png" width="150" height="150">
+<img src="https://user-images.githubusercontent.com/55614782/119258790-dc6efc80-bbe8-11eb-857c-3a2ca2c61852.png" width="200" height="200">
 
 <a href="https://srot.pythonanywhere.com/" style="text-decoration:none; color:white;">Visit Srot</a>
 
@@ -136,7 +136,7 @@ cd vaccine_notifier
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/aishux"><img src="https://avatars.githubusercontent.com/u/61228436?v=4" width="200px;" alt=""/><br /><sub><b>Aishwarya Nathani</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/niksm7"><img src="https://avatars.githubusercontent.com/u/55614782?v=4" width="200px;" alt=""/><br /><sub><b>Nikhil Mankani</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/aishux"><img src="https://avatars.githubusercontent.com/u/61228436?v=4" width="100px;" alt=""/><br /><sub><b>Aishwarya Nathani</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/niksm7"><img src="https://avatars.githubusercontent.com/u/55614782?v=4" width="100px;" alt=""/><br /><sub><b>Nikhil Mankani</b></sub></a><br /></td>
   </tr>
 </table>
