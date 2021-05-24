@@ -10,6 +10,11 @@ import time
 from email.message import EmailMessage
 import smtplib
 
+####### PLEASE FILL THIS ############
+
+EMAIL_ADDRESS = ''
+EMAIL_PASSWORD = ''
+
 app = Flask(__name__)
 scheduler = APScheduler()
 
@@ -48,8 +53,6 @@ headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36'
 }
 
-EMAIL_ADDRESS = 'srot.tech@gmail.com'
-EMAIL_PASSWORD = 'qxlhlpksflyowqzk'
 
 def sendMail():
     global msg,send_mail

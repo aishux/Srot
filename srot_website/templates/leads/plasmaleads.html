@@ -7,6 +7,7 @@
 
     <div>
         {% for plasma in plasmas %}
+        {% if plasma.volunteer_deleted == "No" %}
         <div class="card">
             <div class="card-text">
                 <div class="portada" style="background-image: url('/media/images/leads/plasma.jpg');">
@@ -42,6 +43,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 {% endblock body %}
