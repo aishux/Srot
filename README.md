@@ -115,7 +115,7 @@ cd vaccine_notifier
 
 ## Vaccine Notifier
 
-![Flask DFD](https://user-images.githubusercontent.com/61228436/119272987-71441b00-bc26-11eb-8acc-460f4cac8c67.jpeg)
+![Flask DFD](https://user-images.githubusercontent.com/55614782/119258719-94e87080-bbe8-11eb-997a-5209bc5871a8.jpg)
 
 <br>
 
